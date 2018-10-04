@@ -30,5 +30,66 @@
        </a>
    </div>
 </main>
+<script src="public/dist/js/iziToast.min.js"></script>
+<script>
+    iziToast.show({
+        id: null,
+        class: '',
+        //title: 'توجه!',
+        titleColor: '#fff',
+        titleSize: '',
+        titleLineHeight: '',
+        message: `
+            سلام به وبسایت من خوش آمدید!🙏
+            <br>
+            توجه داشته باشید که طراحی این وبسایت درحال پیشرفت می باشد و ممکن است بعضی از صفحات کار نکنند!
 
+            `,
+        messageColor: '',
+        messageSize: '15',
+        messageLineHeight: '',
+        backgroundColor: '',
+        theme: 'dark', // dark
+        color: '', // blue, red, green, yellow
+        icon: '',
+        iconText: '',
+        iconColor: '',
+        iconUrl: null,
+        image: '{{image_path}}',
+        imageWidth: 70,
+        maxWidth: null,
+        zindex: null,
+        layout: 1,
+        balloon: false,
+        close: true,
+        closeOnEscape: false,
+        closeOnClick: false,
+        displayMode: 0, // once, replace
+        position: 'topCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+        target: '',
+        targetFirst: true,
+        timeout: 10000,
+        rtl: true,
+        animateInside: true,
+        drag: true,
+        pauseOnHover: true,
+        resetOnHover: false,
+        progressBar: true,
+        progressBarColor: '',
+        progressBarEasing: 'ease',
+        overlay: false,
+        overlayClose: false,
+        overlayColor: 'rgba(0, 0, 0, 0.6)',
+        transitionIn: 'flipInX',
+        transitionOut: 'flipOutX',
+        transitionInMobile: 'fadeInUp',
+        transitionOutMobile: 'fadeOutDown',
+        buttons: {},
+        inputs: {},
+        onOpening: function () {},
+        onOpened: function () {},
+        onClosing: function () {},
+        onClosed: function () {}
+    });
+</script>
 {{> footer}}
