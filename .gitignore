@@ -1,2 +1,5 @@
 libs
-.idea
+/.idea
+/.sass-cache
+composer.json
+composer.lock
