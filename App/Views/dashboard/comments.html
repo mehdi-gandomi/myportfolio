@@ -1,0 +1,266 @@
+{{> admin/header}}
+{{> admin/topbar}}
+{{> admin/sidebar}}
+
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    {{> admin/breadcrumb}}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-body">
+                <h4 class="card-title">نظرات کاربران برای پروژه</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">نام پروژه</th>
+                            <th scope="col">نام کاربر</th>
+                            <th scope="col">ایمیل</th>
+                            <th scope="col">پیام</th>
+                            <th scope="col">وضعیت</th>
+                            <th scope="col">عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody id="project-comments">
+                            {{#projects_comments}}
+                                <tr>
+                                    <td>{{project_title}}</td>
+                                    <td>{{username}}</td>
+                                    <td>{{email}}</td>
+                                    <td>{{message}}</td>
+                                    <td>{{state}}</td>
+                                    <td>
+                                        <button class="btn btn-secondary" onclick="changeState('{{comment_id}}')">{{changeBtnState}}</button>
+                                        <button class="btn btn-danger" onclick="deleteComment('{{comment_id}}')">
+                                            حذف کامنت
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/projects_comments}}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <nav aria-label="Page navigation example">
+
+                <ul class="pagination" id="comments-pagination">
+                    {{^firstPage}}
+                    <li class="page-item">
+                        <a class="page-link" href="{{prevUrl}}">
+                            &laquo;
+                        </a>
+                    </li>
+                    {{/firstPage}}
+                    {{#pages}}
+
+                    {{^active}}
+                    <li class="page-item">
+                        <a class="page-link" href="{{url}}">{{title}}</a>
+                    </li>
+                    {{/active}}
+                    {{#active}}
+                    <li class="active page-item">
+                        <a class="page-link" href="{{url}}">{{title}}</a>
+                    </li>
+                    {{/active}}
+                    {{/pages}}
+                    {{^lastPage}}
+                    <li class="page-item">
+                        <a class="page-link" href="{{nextUrl}}">
+                            &raquo;
+                        </a>
+                    </li>
+                    {{/lastPage}}
+                </ul>
+
+        </nav>
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="moreInfoModal" tabindex="-1" role="dialog" aria-labelledby="moreInfoModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <h4 class="modal-title" id="moreInfoModalLabel">متن کامنت</h4>
+            </div>
+            <div class="modal-body" id="moreInfoWrapper">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="public/dist/js/iziToast.min.js"></script>
+<script>
+    var base_url=window.location.origin+"/coderguy";
+    function showMore(comment_id) {
+        let moreInfoModal=$("#moreInfoModal");
+        let moreInfoWrapper=$("#moreInfoWrapper");
+        $.get(base_url+"/dashboard/comment/"+comment_id+"/full-message",function (data) {
+            moreInfoWrapper.html(data);
+            moreInfoModal.modal("show");
+        })
+    }
+    function showAllProjectComments(projectData,el) {
+        console.log(projectData);
+        let output="";
+        for (project of projectData){
+            output+=`
+                <tr>
+                    <td>${project.project_title}</td>
+                    <td>${project.username}</td>
+                    <td>${project.email}</td>
+                    <td>${project.message}</td>
+                    <td>${project.state}</td>
+                    <td>
+                        <button class="btn btn-secondary" onclick="changeState('${project.comment_id}')">${project.changeBtnState}</button>
+                        <button class="btn btn-danger" onclick="deleteComment('${project.comment_id}')">
+                            حذف کامنت
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }
+        el.html(output);
+    }
+    function showCommentsPagination(paginationData, el) {
+        console.log(paginationData);
+        let output="";
+        if (!paginationData.is_first_page){
+            output+=`
+                    <li class="page-item">
+                        <a class="page-link" href="${paginationData.prevUrl}">
+                            &laquo;
+                        </a>
+                    </li>
+            `;
+            console.log(paginationData.is_first_page);
+        }
+        if (paginationData['pages']){
+            let pages=paginationData['pages'];
+            Object.keys(pages).map(function(key, index){
+                if(pages[key].active){
+                    output+=`
+                    <li class="page-item active">
+                        <a class="page-link" href="${pages[key].url}">${pages[key].title}</a>
+                    </li>
+                `;
+                }else {
+                    output+=`
+                    <li class="page-item">
+                        <a class="page-link" href="${pages[key].url}">${pages[key].title}</a>
+                    </li>
+                `;
+                }
+            });
+
+
+        }
+        if (!paginationData.is_last_page){
+            console.log(paginationData.is_last_page);
+            output+=`
+                    <li class="page-item">
+                        <a class="page-link" href="${paginationData.nextUrl}">
+                            &raquo;
+                        </a>
+                    </li>
+            `;
+        }
+        el.html(output);
+    }
+    function getAllProjectComments() {
+        let urlArr=window.location.pathname.split("/");
+        let urlToGo=base_url+"/dashboard/comment/all-json";
+        if (urlArr[4]){
+            urlToGo=base_url+"/dashboard/comment/all-json?page="+urlArr[4];
+        }else {
+            urlToGo=base_url+"/dashboard/comment/all-json";
+        }
+
+        $.get(urlToGo,function (data) {
+
+            data=JSON.parse(data);
+            showAllProjectComments(data.project_comments,$("#project-comments"));
+            showCommentsPagination(data.pagination,$("#comments-pagination"))
+        });
+    }
+    function changeState(comment_id) {
+       if (confirm("واقعا می خوای این کامنت رو ویرایش کنی؟")){
+           $.ajax({
+               url: base_url+"/dashboard/comment/update",
+               type: 'PUT',
+               data: {comment_id:comment_id},
+               success: function (data) {
+                   data=JSON.parse(data);
+
+                   if (data.status=='ok'){
+                       iziToast.success({
+                           title: 'موفق',
+                           message: 'اطلاعات با موفقیت ثبت شد!',
+                       });
+                       getAllProjectComments();
+                   }else {
+                       iziToast.error({
+                           title: 'خطا',
+                           message: 'خطایی در ثبت اطلاعات رخ داد.',
+                       });
+                   }
+               }
+
+           });
+       }else {
+           iziToast.warning({
+
+               message: 'صرفنظر شد!',
+           });
+       }
+
+    }
+    function deleteComment(comment_id) {
+        if (confirm("واقعا می خوای این کامنت رو پاک کنی؟")){
+            $.ajax({
+                url: base_url+"/dashboard/comment/delete",
+                type: 'DELETE',
+                data: {comment_id:comment_id},
+                success: function (data) {
+                    data=JSON.parse(data);
+
+                    if (data.status=='ok'){
+                        iziToast.success({
+                            title: 'موفق',
+                            message: 'اطلاعات با موفقیت ثبت شد!',
+                        });
+                        getAllProjectComments();
+                    }else {
+                        iziToast.error({
+                            title: 'خطا',
+                            message: 'خطایی در ثبت اطلاعات رخ داد.',
+                        });
+                    }
+                }
+
+            });
+        }else {
+            iziToast.warning({
+                message: 'صرفنظر شد.',
+            });
+        }
+
+    }
+</script>
+{{> admin/footer}}

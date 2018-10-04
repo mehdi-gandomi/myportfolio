@@ -1,0 +1,158 @@
+{{> admin/header}}
+{{> admin/topbar}}
+{{> admin/sidebar}}
+
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper" id="projects-page">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    {{> admin/breadcrumb}}
+    <div class="card card-body">
+        <h4 class="card-title">فرم ویرایش پروژه</h4>
+        <form id="editProject" class="row" method="post">
+            <input type="hidden" name="defaultPic" id="defaultPic">
+            <div class="col-md-6 col-sm-12">
+                <div id="profileAvatarWrapper" class="form-group">
+                    <div class="custom-file-container" data-upload-id="profilePic">
+                        <label class="custom_file_label">
+                            <a href="javascript:void(0)" class="custom-file-container__image-clear btn btn-danger" id="imageClear" title="Clear Image">x</a>
+                            تصویر پروژه
+
+                        </label>
+                        <label class="custom-file-container__custom-file" >
+                            <input type="file" class="custom-file-container__custom-file__custom-file-input"  accept="image/*" name="project_image">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <span style="visibility: hidden" class="custom-file-container__custom-file__custom-file-control"></span>
+                            <div class="custom-file-container__image-preview" style="background-image: url({{project_image}})"></div>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-7">
+                        <label for="project_title">عنوان پروژه </label>
+                        <input name="project_title" id="project_title" type="text" class="form-control" value="{{project_title}}">
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="cat_id">دسته بندی </label>
+                        <select name="cat_ids[]" id="cat_id" class="form-control" multiple="">
+                            {{#selected_categories}}
+                                <option value="{{id}}" selected>{{cat_title}}</option>
+                            {{/selected_categories}}
+                            {{#other_categories}}
+                                <option value="{{id}}">{{cat_title}}</option>
+                            {{/other_categories}}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-7">
+                        <label for="location">محل</label>
+                        <input type="text" name="location" id="location" class="form-control" value="{{location}}">
+
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="skill_ids"> مهارت های مورد استفاده</label>
+                        <select name="skill_ids[]" id="skill_ids"  class="form-control" multiple>
+                            {{#selected_skills}}
+                            <option value="{{skill_id}}" selected>{{skill_title}}</option>
+                            {{/selected_skills}}
+                            {{#project_skills}}
+                            <option value="{{skill_id}}">{{skill_title}}</option>
+                            {{/project_skills}}
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6 col-sm-12">
+
+                <div class="form-group">
+                    <label for="project_link">لینک پروژه</label>
+                    <input name="project_link" id="project_link" type="url" class="form-control"  value="{{project_link}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="project_description">توضیحات پروژه</label>
+                    <textarea class="form-control" name="project_description" id="project_description" cols="30" rows="5">{{project_description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <label for="upload_imgs" class="btn btn-primary">تصاویر گالری </label>
+                        <input style="visibility: hidden" type="file" id="upload_imgs" name="gallery-images[]" multiple/>
+                    </p>
+                    <div class="quote-imgs-thumbs " id="img_preview" aria-live="polite">
+                        {{#project_gallery}}
+                            <img src="public/images/projects/gallery/{{thumb}}" class="img-preview-thumb">
+                        {{/project_gallery}}
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="ثبت" class="btn btn-success" >
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+
+<script src="public/dist/js/file-upload-with-preview.min.js"></script>
+<script src="public/dist/js/iziToast.min.js"></script>
+<script>
+    //First upload
+    var firstUpload = new FileUploadWithPreview('profilePic');
+    var clearBtn=document.querySelector(".custom-file-container__image-clear");
+    var defaultPic=document.querySelector("#defaultPic");
+    clearBtn.addEventListener("click",function () {
+        defaultPic.value="yes";
+    });
+    //form submit
+    var base_url=window.location.origin+"/coderguy";
+    var editForm=$("#editProject");
+    editForm.on("submit",function (e) {
+        e.preventDefault();
+        var formData=new FormData($(this)[0]);
+        var $projectId=window.location.pathname.split("/")[5];
+        $.ajax({
+            url: base_url+"/dashboard/project/update/"+$projectId,
+            type: 'POST',
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            // mimeType: "multipart/form-data",
+            beforeSend: function (e) {
+
+            },
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.status=='ok'){
+                    iziToast.success({
+                        message: 'اطلاعات با موفقیت ویرایش شد!',
+                    });
+                }else {
+                    iziToast.error({
+
+                        message: 'در ویرایش اطلاعات خطایی رخ داد',
+                    });
+                }
+
+            }
+        });
+
+    });
+</script>
+<script src="public/dist/js/file-upload.js"></script>
+{{> admin/footer}}

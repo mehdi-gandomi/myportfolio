@@ -1,0 +1,17 @@
+
+{{> header}}
+    <h1>Welcome to posts index.</h1>
+    <h4>From views</h4>
+    <h3>Hello {{name}}</h3>
+    <ul>
+        {{# colors}}
+            <li>{{ . }}</li>
+        {{/colors}}
+    </ul>
+
+    <h2>Posts</h2>
+        {{# posts}}
+            <h2>{{title}}</h2>
+            <p>{{content}}</p>
+        {{/posts}}
+{{> footer}}

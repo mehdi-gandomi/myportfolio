@@ -1,0 +1,44 @@
+main#blog-page{
+
+  .filter-section{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background: #fff;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    .filter-form{
+      display: flex;
+      select{
+        flex-basis: 33.333333%;
+      }
+      input[type="submit"]{
+        width: 20%;
+      }
+    }
+    .search-form{
+      display: flex;
+      input[type="text"]{
+        flex-basis: 70%;
+      }
+      input[type="submit"]{
+        flex-basis: 25%;
+      }
+
+    }
+  }
+
+  .blog-cards{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 1rem;
+  }
+
+}
+
+.btn-inline{
+  display: inline-block !important;
+}
+.ml-1{
+  margin-left: 1rem;
+}

@@ -1,0 +1,154 @@
+{{> header}}
+{{> menu}}
+
+
+<main id="project-page">
+    <h1 class="text-center p-1">{{project_title}}</h1>
+    <hr>
+    <div class="project-overview">
+        <div class="project-img">
+            <img src="public/images/projects/{{project_image}}" alt="">
+        </div>
+        <div class="project-description">
+            <h3 class="text-secondary title" >شرح پروژه</h3>
+            {{project_description}}
+
+        </div>
+        <div class="project-skills">
+
+            <div class="talents">
+                <h3>   مهارت ها:</h3>
+                <ul>
+                    {{#project_skills}}
+                        <li><i class="icon-ok-circled"></i><a target="_blank" href="https://en.wikipedia.org/wiki/{{.}}">{{.}}</a></li>
+                    {{/project_skills}}
+                </ul>
+
+            </div>
+            <div class="preview-section">
+                <div class="location">
+                    <h3>محل : </h3>
+                    <p>{{location}}</p>
+                </div>
+                <div class="link">
+                    <a href="{{project_link}}" class="btn btn-light"><i class="icon-link-ext"></i><span>مشاهده وبسایت</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="project-gallery">
+            <h2>{{gallery_title}}</h2>
+            <ul class="box-container three-cols inviewport">
+                {{#project_galleries}}
+                    <li class="box visible">
+                        <a href="{{full_img}}" class="glightbox2" data-glightbox="title:{{project_title}}">
+                            <img src="{{thumb}}" alt="image">
+                        </a>
+                    </li>
+                {{/project_galleries}}
+
+
+            </ul>
+        </div>
+
+    </div>
+    <h1 class="text-center mt-4">نظرات</h1>
+    <div class="project-comment">
+        <div class="new-comment">
+            <form action="/portfolio/comment/new" id="newCommentForm" method="POST">
+                <div class="top-section">
+                    <div class="form-inputs">
+                        <label for="username">نام شما</label>
+                        <input id="username" type="text" name="username">
+                    </div>
+                    <div class="form-inputs">
+                        <label for="email">ایمیل شما</label>
+                        <input id="email" type="email" name="email">
+                    </div>
+                </div>
+
+                <div class="bottom-section">
+                    <div class="form-inputs">
+                        <label for="message">پیام شما</label>
+                        <textarea id="message" type="text" name="message" rows="5"></textarea>
+                    </div>
+                    <p>
+                        <button class="btn-dark">ارسال</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="comments">
+            {{#comments}}
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="user">
+                            <h3>{{username}} می گه : </h3>
+                            <p>1397/06/29</p>
+                        </div>
+                        <div class="reply-section">
+                            <a>
+                                <i class="icon-reply"></i>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="content">
+                        {{message}}
+                    </div>
+                </div>
+            {{/comments}}
+            {{^comments}}
+                <div class="comment">
+                    هیچ نظری برای این پروژه یافت نشد
+                </div>
+            {{/comments}}
+        </div>
+    </div>
+
+</main>
+
+<script src="public/dist/js/glightbox.min.js"></script>
+<script src="public/dist/js/axios.min.js"></script>
+<script src="public/dist/js/iziToast.min.js"></script>
+<script>
+    var lightbox = GLightbox();
+    var lightboxDescription = GLightbox({
+        selector: 'glightbox2'
+    });
+</script>
+<script>
+    var base_url=window.location.origin+"/coderguy/";
+    var newCommentForm=document.querySelector("#newCommentForm");
+    newCommentForm.addEventListener("submit",function (e) {
+        e.preventDefault();
+        var data=new URLSearchParams(new FormData(e.target)).toString();
+        var porfolioId=window.location.pathname.split("/")[3];
+        console.log(porfolioId);
+        data+="&project_id="+porfolioId;
+        axios.post(base_url+e.target.getAttribute("action"), data)
+            .then(function (response) {
+                console.log(response.data.status);
+                if (response.data.status=='ok'){
+                    iziToast.success({
+                        title: 'موفق',
+                        message: 'نظر شما با موفقیت ثبت شد!',
+                    });
+                }else {
+                    iziToast.error({
+                        title: 'خطا',
+                        message: 'در ثبت نظر شما خطایی رخ داد!',
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                iziToast.error({
+                    title: 'خطا',
+                    message: 'در ثبت نظر شما خطایی رخ داد!',
+                });
+
+            });
+    })
+
+</script>
+{{> footer}}

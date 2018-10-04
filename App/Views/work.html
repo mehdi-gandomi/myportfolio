@@ -1,0 +1,88 @@
+{{> header}}
+{{> menu}}
+
+
+<main id="work-page">
+    <h1 class="lg-heading">
+        نمونه کارهای
+        <span class="text-secondary">من</span>
+    </h1>
+    <h2 class="sm-heading">
+        چند تا از پروژه هایی که انجام دادم را ببینید.
+    </h2>
+
+<div id="projects">
+        <div class="filter-section">
+            <button data-tag="all" class="filter-btn btn active">All</button>
+            <button data-tag="php" class="filter-btn btn ">PHP</button>
+            <button data-tag="html" class="filter-btn btn">HTML</button>
+            <button data-tag="javascript" class="filter-btn btn">Javascript</button>
+        </div>
+    <div class="project-items">
+        {{#projects}}
+            <div aria-label="{{project_skills}}" class="item ">
+            <img class="image" src="public/images/projects/{{project_image}}" alt="">
+            <div class="overlay overlay-right">
+                <div class="title">{{project_title}}</div>
+                <div class="skill">
+                    {{project_skills}}
+                </div>
+                <div class="buttons">
+                    <a href="{{project_link}}" target="_blank" class="icon-link">
+                    </a>
+                    <a href="portfolio/{{id}}" class="icon-search">
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/projects}}
+
+    </div>
+    </div>
+</main>
+
+
+<script type="text/javascript">
+    var filterBtns=document.querySelectorAll(".filter-btn");
+    var projectItems=document.querySelectorAll(".project-items .item");
+    function filterProjects(tag_id) {
+
+        for (el of projectItems){
+            let tags=el.getAttribute("aria-label").toLowerCase().split(",");
+            console.log(tags);
+            for (tag of tags){
+                if(tag===tag_id){
+                    el.classList.remove("hide");
+                    el.classList.add('show');
+                    break;
+                }else {
+                    el.classList.remove('show');
+                    el.classList.add('hide');
+
+                }
+            }
+        }
+    }
+    function clearBtns() {
+        for (el of filterBtns){
+            el.classList.remove("active");
+        }
+    }
+    for (el of filterBtns){
+        el.addEventListener("click",function (e) {
+            clearBtns();
+            e.target.classList.add("active");
+            var tag_id=e.target.getAttribute("data-tag");
+            if (tag_id==='all'){
+                for (element of projectItems){
+                    element.classList.remove("hide");
+                    element.classList.add("show");
+                }
+            }else {
+                filterProjects(tag_id);
+            }
+
+        });
+    }
+</script>
+{{> footer}}

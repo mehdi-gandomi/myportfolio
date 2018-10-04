@@ -1,0 +1,78 @@
+[23-Jun-2018 12:31:20 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'No route matched'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('fuck')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 78</p>
+[23-Jun-2018 12:51:15 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'No route matched'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('fuck')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 78</p>
+[23-Jun-2018 12:51:15 Europe/Berlin] PHP Fatal error:  Uncaught Mustache_Exception_UnknownTemplateException: Unknown template: 404.html in C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php:102
+Stack trace:
+#0 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php(82): Mustache_Loader_FilesystemLoader->loadFile('404.html')
+#1 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(657): Mustache_Loader_FilesystemLoader->load('404.html')
+#2 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(236): Mustache_Engine->loadTemplate('404.html')
+#3 C:\xampp\htdocs\mvc-framework\Core\View.php(28): Mustache_Engine->render('404.html', Array)
+#4 C:\xampp\htdocs\mvc-framework\Core\Error.php(38): Core\View::renderMustache('404.html', Array)
+#5 [internal function]: Core\Error::exceptionHandler(Object(Exception))
+#6 {main}
+  thrown in C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php on line 102
+[23-Jun-2018 12:51:40 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'No route matched'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('fuck')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 78</p>
+[23-Jun-2018 12:52:37 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'No route matched'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('fuck')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 78</p>
+[23-Jun-2018 12:53:00 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Mustache_Exception_UnknownTemplateException'</p>
+<p>Message: 'Unknown template: posts/inde'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php(82): Mustache_Loader_FilesystemLoader->loadFile('posts/inde')
+#1 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(657): Mustache_Loader_FilesystemLoader->load('posts/inde')
+#2 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(236): Mustache_Engine->loadTemplate('posts/inde')
+#3 C:\xampp\htdocs\mvc-framework\Core\View.php(28): Mustache_Engine->render('posts/inde', Array)
+#4 C:\xampp\htdocs\mvc-framework\App\Controllers\Posts.php(19): Core\View::renderMustache('posts/inde', Array)
+#5 [internal function]: App\Controllers\Posts->indexAction()
+#6 C:\xampp\htdocs\mvc-framework\Core\Controller.php(12): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\mvc-framework\Core\Router.php(67): Core\Controller->__call('index', Array)
+#8 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('posts/index')
+#9 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php' On Line 102</p>
+[23-Jun-2018 12:53:00 Europe/Berlin] PHP Fatal error:  Uncaught Mustache_Exception_UnknownTemplateException: Unknown template: system/500.html in C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php:102
+Stack trace:
+#0 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php(82): Mustache_Loader_FilesystemLoader->loadFile('system/500.html')
+#1 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(657): Mustache_Loader_FilesystemLoader->load('system/500.html')
+#2 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(236): Mustache_Engine->loadTemplate('system/500.html')
+#3 C:\xampp\htdocs\mvc-framework\Core\View.php(28): Mustache_Engine->render('system/500.html', Array)
+#4 C:\xampp\htdocs\mvc-framework\Core\Error.php(38): Core\View::renderMustache('system/500.html', Array)
+#5 [internal function]: Core\Error::exceptionHandler(Object(Mustache_Exception_UnknownTemplateException))
+#6 {main}
+  thrown in C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php on line 102
+[23-Jun-2018 12:53:26 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Mustache_Exception_UnknownTemplateException'</p>
+<p>Message: 'Unknown template: posts/inde'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php(82): Mustache_Loader_FilesystemLoader->loadFile('posts/inde')
+#1 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(657): Mustache_Loader_FilesystemLoader->load('posts/inde')
+#2 C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Engine.php(236): Mustache_Engine->loadTemplate('posts/inde')
+#3 C:\xampp\htdocs\mvc-framework\Core\View.php(28): Mustache_Engine->render('posts/inde', Array)
+#4 C:\xampp\htdocs\mvc-framework\App\Controllers\Posts.php(19): Core\View::renderMustache('posts/inde', Array)
+#5 [internal function]: App\Controllers\Posts->indexAction()
+#6 C:\xampp\htdocs\mvc-framework\Core\Controller.php(12): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\mvc-framework\Core\Router.php(67): Core\Controller->__call('index', Array)
+#8 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('posts/index')
+#9 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\vendor\mustache\mustache\src\Mustache\Loader\FilesystemLoader.php' On Line 102</p>

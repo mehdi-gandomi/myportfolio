@@ -1,0 +1,90 @@
+{{> header}}
+{{> menu}}
+<main id="blog-page">
+    <!--<h2 class="text-center sm-heading" style="font-size: 2.5rem">{{title}}</h2>-->
+
+   <div class="filter-section">
+       <form action="" class="filter-form">
+           <select name="categories" id="" class="form-control ml-1">
+               <option value="web-development">طراحی وب</option>
+               <option value="tips-tricks">ترفند های کامپیوتر</option>
+               <option value="programming">برنامه نویسی</option>
+           </select>
+           <select name="filter" id="" class="form-control ml-1">
+               <option value="newest">جدیدترین مقالات</option>
+               <option value="oldest">قدیمی ترین مقالات</option>
+               <option value="most-viewed">پربازدیدترین مقالات</option>
+           </select>
+           <input type="submit" name="submit" value="فیلتر"  class="btn btn-inline">
+       </form>
+       <form action="" class="search-form">
+           <input type="text" name="search" class="form-control ml-1">
+           <input type="submit" name="submit" value="جستجو"  class="btn btn-inline">
+       </form>
+   </div>
+   <div class="blog-cards">
+       {{#posts}}
+            <article class="card">
+           <header class="card__thumb">
+               <a href="#"><img src="https://images.unsplash.com/photo-1512466699224-9d8217244131?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4b6f389eb54cb8e27ee8ee5d4040a5d7&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb" ></a>
+
+           </header>
+           <div class="card__date">
+               <span class="card__date__day">23</span>
+               <span class="card__date__month">شهریور</span>
+           </div>
+           <div class="card__body ">
+               <div class="card__category"><a href="#">{{tags}}</a></div>
+               <div class="card__title"><a href="post/{{post_slug}}">{{post_title}}</a></div>
+               <!--<div class="card__subtitle">زیرنویس نمونه برای پست</div>-->
+               <p class="card__description">{{preview_text}}</p>
+           </div>
+           <footer class="card__footer">
+               <span class="icon icon-clock">6 دقیقه</span>
+               <span class="icon icon-comment-1"><a href="#">2 نظر</a></span>
+           </footer>
+       </article>
+       {{/posts}}
+
+   </div>
+    <nav class="pagination-container">
+        <div class="pagination">
+            {{^firstPage}}
+            <a class="pagination-newer" href="{{prevUrl}}">
+                &laquo;
+            </a>
+            {{/firstPage}}
+
+            <span class="pagination-inner">
+                   {{#pages}}
+                       {{^active}}
+                           <a href="{{url}}">{{pagination_title}}</a>
+                       {{/active}}
+                       {{#active}}
+                            <a href="{{url}}" class="pagination-active">{{pagination_title}}</a>
+                       {{/active}}
+                   {{/pages}}
+				</span>
+            {{^lastPage}}
+            <a class="pagination-older" href="{{nextUrl}}">
+                &raquo;
+            </a>
+            {{/lastPage}}
+
+        </div>
+    </nav>
+</main>
+<script src="public/dist/js/fittext.js"></script>
+<script>
+
+    var blogDescriptionElements=document.querySelectorAll('.card__description');
+    var blogTitleElements=document.querySelectorAll(".card__title");
+    blogTitleElements.forEach(function (el, index) {
+        fitText(el, 1.3)
+    });
+    blogDescriptionElements.forEach(function (el,index) {
+        fitText(el, 2)
+    });
+
+</script>
+{{> footer}}

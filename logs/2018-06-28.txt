@@ -1,0 +1,21 @@
+[28-Jun-2018 17:57:17 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'Controller class App\Controllers\Home not found'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 74</p>
+[28-Jun-2018 17:57:20 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'Controller class App\Controllers\Home not found'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 74</p>
+[28-Jun-2018 17:57:26 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Exception'</p>
+<p>Message: 'Controller class App\Controllers\Home not found'</p>
+<p>stack trace :<pre>#0 C:\xampp\htdocs\mvc-framework\index.php(49): Core\Router->dispatch('')
+#1 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\mvc-framework\Core\Router.php' On Line 74</p>

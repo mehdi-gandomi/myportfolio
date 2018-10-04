@@ -1,0 +1,201 @@
+
+.card {
+  position: relative;
+  //width: $widthimg;
+  background: $blanc;
+  box-shadow: 0 0 20px rgba($noir,0.1);
+  transition: box-shadow $duration;
+  &:hover {
+    box-shadow: 0 0 50px rgba($noir ,0.3);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.card__date {
+  background: $color;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: $blanc;
+  text-align: center;
+  line-height: 13px;
+  font-weight: bold;
+  padding-top: 10px;
+
+  &__day {
+    display: block;
+    font-size: 14px;
+  }
+
+  &__month {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+}
+
+
+
+.card__thumb{
+  height: $heightimg;
+
+  overflow: hidden;
+  background-color: $noir;
+  transition: height $duration;
+
+  img{
+    max-width: 100%;
+    display: block;
+    opacity: 1;
+    transition: opacity $duration, transform $duration;
+    transform: scale(1);
+  }
+
+  .card:hover & img{
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+  .card:hover &{
+    height: $heightimg - $heighthoverimg ;
+  }
+}
+
+
+
+.card__body {
+  position: relative;
+  padding: 20px;
+  height: $heightbody;
+  transition: height $duration;
+  .card:hover &{ height: $heightbody + $heighthoverimg; }
+}
+
+.card__category {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  height: 25px;
+  padding: 0 15px;
+  background: $color;
+  color: $blanc;
+  font-size: 11px;
+  line-height: 25px;
+  a {
+    color: $blanc;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+.card__title {
+  padding: 0 0 10px 0;
+  margin: 0;
+  font-size: 22px;
+  color: $noir;
+  font-weight: bold;
+  .card:hover &{
+    animation: titleBlur $duration;
+  }
+}
+
+.card__subtitle {
+  margin: 0;
+  padding: 0 0 10px 0;
+  color: $color;
+  font-size: 19px;
+  .card:hover &{
+    animation: subtitleBlur $duration;
+  }
+}
+
+.card__description {
+  //position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 40px;
+
+  margin: 0;
+  padding: 0;
+
+  color: $text;
+  font-size: 13px;
+  line-height: 27px;
+
+  opacity: 0;
+  transition: opacity $duration - 0.1s, transform $duration - 0.1s;
+  transition-delay: 0s;
+  transform: translateY(25px);
+  .card:hover &{
+    opacity: 1;
+    transition-delay: 0.1s;
+    transform: translateY(0);
+  }
+}
+
+.card__footer {
+  position: absolute;
+  color: $footer;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  font-size: 11px;
+  .icon--comment {
+    margin-left: 10px;
+  }
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+  &:before {
+    display: inline-block;
+    text-align: center;
+    height: 14px;
+    width: 14px;
+    margin-top: -2px;
+    margin-right: 6px;
+  }
+}
+
+.icon--comment {
+  &:before {
+    content: "\f0e6 ";
+    @include icon;
+  }
+}
+
+.icon--time {
+  &:before {
+    content: "\f017 ";
+    @include icon;
+  }
+}
+
+@keyframes titleBlur {
+  0%{
+    opacity:0.6;
+    text-shadow: 0px 5px 5px rgba($noir,0.6);
+  }
+  100%{
+    opacity:1;
+    text-shadow: 0px 5px 5px rgba($noir,0);
+  }
+}
+
+@keyframes subtitleBlur {
+  0%{
+    opacity:0.6;
+    text-shadow: 0px 5px 5px rgba($color,0.6);
+  }
+  100%{
+    opacity:1;
+    text-shadow: 0px 5px 5px rgba($color,0);
+  }
+}

@@ -1,0 +1,10 @@
+[08-Aug-2018 12:05:49 Europe/Berlin] 
+<h1>Fatal Error</h1>
+<p>Uncaught Exception'Error'</p>
+<p>Message: 'Class 'App\Controllers\Config' not found'</p>
+<p>stack trace :<pre>#0 [internal function]: App\Controllers\Home->indexAction()
+#1 C:\xampp\htdocs\coderguy\Core\Controller.php(12): call_user_func_array(Array, Array)
+#2 C:\xampp\htdocs\coderguy\Core\Router.php(67): Core\Controller->__call('index', Array)
+#3 C:\xampp\htdocs\coderguy\index.php(29): Core\Router->dispatch('')
+#4 {main}</pre></p>
+<p>Thrown in 'C:\xampp\htdocs\coderguy\App\Controllers\Home.php' On Line 22</p>

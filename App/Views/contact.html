@@ -1,0 +1,62 @@
+{{> header}}
+{{> menu}}
+
+
+<main  id="contact-page">
+    <h1 class="lg-heading">
+        ارتباط
+        <span class="text-secondary">با من</span>
+    </h1>
+
+<div class="contact-container animated bounceInRight">
+    <h1 class="brand">هر چی میخای بگو</h1>
+    <div class="wrapper">
+        <div class="contact-info">
+            <h2>راه های ارتباطی با من</h2>
+            <ul>
+                <li>
+                    <i class="icon-mail-alt text-secondary icon-2x"></i>
+                    <a href="mailto:{{email}}">
+                        <!--<span class="text-secondary">ایمیل : </span>-->
+                        {{email}}
+                    </a>
+                </li>
+                <li>
+                    <i class="icon-mobile text-secondary icon-2x"></i>
+                    {{phone}}
+                </li>
+                <li>
+                    <i class="icon-road text-secondary icon-2x"></i>
+                    {{address}}
+                </li>
+            </ul>
+        </div>
+        <div class="contact-form">
+            <form action="https://formspree.io/coderguy1999@gmail.com" method="POST">
+                <p>
+                    <label for="">نام شما</label>
+                    <input type="text" name="name">
+                </p>
+                <p>
+                    <label for="">ایمیل شما</label>
+                    <input type="email" name="email">
+                </p>
+                <p>
+                    <label for="">شماره تلفن(اختیاری)</label>
+                    <input type="text" name="phone">
+                </p>
+                <p>
+                    <label for="">پیام شما</label>
+                    <textarea type="text" name="message" rows="5"></textarea>
+                </p>
+                <p>
+                    <button class="btn-dark">ارسال</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</main>
+{{> footer}}

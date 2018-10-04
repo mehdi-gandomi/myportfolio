@@ -1,0 +1,359 @@
+{{> admin/header}}
+{{> admin/topbar}}
+{{> admin/sidebar}}
+
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    {{> admin/breadcrumb}}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-body">
+                <h4 class="card-title">صفحه درباره من</h4>
+                <h5 class="card-subtitle"> ویرایش اطلاعات</h5>
+                <form id="edit-about-me" class="row">
+                    <input type="hidden" name="user_id" value="{{user_id}}">
+                    <div class="form-group col-5">
+                        <label for="description">شرح حال</label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{bio}}</textarea>
+                    </div>
+
+                <div class="col-7 row">
+                    <div class="form-group col-5">
+                        <label for="skill_id">انتخاب مهارت</label>
+                        <select name="skill_id" id="skill_id" class="form-control">
+                            {{#skills}}
+                            <option value="{{skill_id}}" style="color:{{color}}">{{skill_title}}</option>
+                            {{/skills}}
+                        </select>
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="">میزان مهارت : </label>
+                        <div id='volume' class='slider'>
+                            <output class='slider-output'>50</output>
+                            <div class='slider-track'>
+                                <div class='slider-thumb'></div>
+                                <div class='slider-level'></div>
+                            </div>
+                            <input class='slider-input' type='range' name="skill_value" value='50' min='0' max='100'step="5" ر/>
+                        </div>
+                    </div>
+                    <div class="form-group col-2">
+                        <input type="submit" name="submit" value="ذخیره" class="btn btn-success mt-4">
+                    </div>
+                    <div class="all_skills_wrapper"></div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card skill_card card-body row">
+                <h4 class="card-title col-12">اضافه کردن مهارت</h4>
+                <form id="newSkillForm" class="col-md-6 row">
+                        <div class="form-group col-md-5 col-sm-12">
+                            <label for="skill_title">نام مهارت</label>
+                            <input class="form-control" type="text" name="skill_title" id="skill_title">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                            <label for="skill_color">رنگ مهارت</label>
+                            <input class="form-control " type="color" name="color" id="skill_color">
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-success " type="submit" name="submit" value="ثبت">
+                        </div>
+
+                </form>
+                <div class="col-md-6 row">
+                    <table class="table table-hover table-bordered col-12" id="skills_wrapper">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card card-body">
+
+                <div class="row" id="job-fields-wrapper">
+
+                    {{#job_fields}}
+                        <div class="col-md-4">
+                                <form action="{{base_url}}/dashboard/edit-about-me/job-field" class="jobFieldForm" method="post">
+                                    <input type="hidden" name="user_id" id="userId" value="{{user_id}}">
+                                    <div class="form-group">
+                                        <label >عنوان</label>
+                                        <input class="form-control" type="text" name="title"  value="{{title}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >زیرنویس</label>
+                                        <input class="form-control" type="text" name="subtitle" value="{{subtitle}}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label >متن</label>
+                                        <textarea  class="form-control" name="content"  >{{content}}</textarea>
+                                    </div>
+                                    <input type="submit" value="ثبت" class="btn btn-primary">
+                                    <button type="button" class="btn btn-success" onclick="addNewField()">اضافه کردن فیلد جدید</button>
+                                </form>
+                        </div>
+                    {{/job_fields}}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script src="public/dist/js/range-slider.js"></script>
+<script src="public/dist/js/iziToast.min.js"></script>
+<script type="text/javascript">
+    var base_url=window.location.origin+"/coderguy";
+    var editForm=$("#edit-about-me");
+    var jobFieldForms=document.querySelectorAll(".jobFieldForm");
+    for (let i=0;i<jobFieldForms.length;i++){
+        jobFieldForms[i].addEventListener("submit",function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("action"),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (data) {
+                    data=JSON.parse(data);
+                    if (data.status=='ok'){
+                        iziToast.success({
+                            title: 'موفق',
+                            message: 'اطلاعات با موفقیت ثبت شد!',
+                        });
+                        getAllJobFields();
+                    }else {
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'خطایی در ثبت اطلاعات رخ داد.',
+                        });
+                    }
+                }
+
+            });
+        });
+    }
+    var newSkillForm=$("#newSkillForm");
+    editForm.on("submit",function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: base_url+"/dashboard/edit-about-me",
+            type: 'POST',
+            data: $(this).serialize(),
+            beforeSend:function () {
+              $(".all_skills_wrapper").css("display","none");
+            },
+            success: function (data) {
+                console.log(data);
+                 data = JSON.parse(data);
+                 if (data.status=='ok'){
+                     iziToast.success({
+                         title: 'OK',
+                         message: 'اطلاعات با موفقیت ثبت شد!',
+                     });
+                     getAllUserSkills();
+                     $(".all_skills_wrapper").css("display","block");
+                 }else {
+                     iziToast.error({
+                         title: 'Error',
+                         message: 'خطایی در ثبت اطلاعات رخ داد.',
+                     });
+
+                 }
+
+            }
+        });
+
+    });
+    function showJobFields(fieldsData,el) {
+        let output="";
+        for (field of fieldsData){
+            output+=`
+                <div class="col-md-4">
+                            <form action="${base_url}/dashboard/edit-about-me/job-field" class="jobFieldForm" method="post">
+                                <input type="hidden" name="user_id" value="${field.user_id}">
+                                <div class="form-group">
+                                    <label >عنوان</label>
+                                    <input class="form-control" type="text" name="title"  value="${field.title}">
+                                </div>
+                                <div class="form-group">
+                                    <label >زیرنویس</label>
+                                    <input class="form-control" type="text" name="subtitle" value="${field.subtitle}" >
+                                </div>
+                                <div class="form-group">
+                                    <label >متن</label>
+                                    <textarea  class="form-control" name="content"  >${field.content}</textarea>
+                                </div>
+                                <input type="submit" value="ثبت" class="btn btn-primary">
+                                <button type="button" class="btn btn-success" onclick="addNewField()">اضافه کردن فیلد جدید</button>
+                            </form>
+                    </div>
+            `;
+        }
+        el.html(output);
+
+    }
+    function getAllJobFields() {
+        $.get(base_url+"/dashboard/edit-about-me/job-field?user_id="+$("#userId").val(),function (data) {
+           data=JSON.parse(data);
+           showJobFields(data,$("#job-fields-wrapper"));
+        });
+    }
+    function getAllUserSkills() {
+        $.get(base_url+"/dashboard/get_user_skills",function (data) {
+           data=JSON.parse(data);
+           console.log(data);
+           var el=$(".all_skills_wrapper");
+           showData(data,el);
+        });
+    }
+    function getAllSkills(){
+        $.get(base_url+"/dashboard/skill/all",function (data) {
+            data=JSON.parse(data);
+            showAllSkills(data);
+            generateOptions(data,$("#skill_id"));
+        })
+    }
+    function showData(data,el) {
+        var output="<div class='row'>";
+        for (item of data ){
+
+                output+=`
+                <div class="col-3" >
+                    <p ><span style="color: ${item.color};float: left">${item.skill_value}</span> ${item.skill_title}</p>
+                </div>
+            `;
+
+        }
+        output+="</div>";
+        el.html(output);
+    }
+    function showAllSkills(skillsData) {
+        var output="<tbody>";
+        var $el=$("#skills_wrapper");
+        var limit=3;
+        var counter=1;
+        output+="<tr>";
+        for (skill of skillsData){
+            if (counter<=limit){
+                output+=`
+                   <td style="color: ${skill.color}">${skill.skill_title} <button onclick="deleteSkill('${skill.skill_id}')" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+            `;
+            }
+            counter++;
+            if (counter>limit){
+                output+="</tr><tr>";
+                counter=1;
+            }
+
+        }
+        output+="</tbody>";
+        $el.html(output);
+    }
+    function deleteSkill(skill_id) {
+        if (confirm("واقعا می خواهبد این مهارت را حذف کنید؟")){
+            $.ajax({
+                url: base_url+"/dashboard/skill/delete",
+                type: 'DELETE',
+                contentType:"application/json",
+                data: {id:skill_id},
+                success: function (data) {
+                    data=JSON.parse(data);
+                    if (data.status=='ok'){
+                        iziToast.success({
+                            title: 'OK',
+                            message: 'مهارت با موفقیت حذف شد!',
+                        });
+                        getAllSkills();
+                    }else {
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'خطایی در حذف اطلاعات رخ داد.',
+                        });
+                    }
+                }
+
+            });
+        }else {
+            alert("از عملیات صرفنظر سد!");
+        }
+
+    }
+    function generateOptions(data,el) {
+        var output="";
+        for (skill of data){
+            output+=`
+                <option style="color:${skill.color}" value="${skill.skill_id}">${skill.skill_title}</option>
+            `;
+        }
+        el.html(output);
+    }
+    function addNewField() {
+        let el=$("#job-fields-wrapper");
+        el.append(
+            `
+                <div class="col-md-4">
+                            <form action="{{base_url}}/dashboard/edit-about-me/job-field" class="jobFieldForm" method="post">
+                                <input type="hidden" name="user_id" value="{{user_id}}">
+                                <div class="form-group">
+                                    <label >عنوان</label>
+                                    <input class="form-control" type="text" name="title"  >
+                                </div>
+                                <div class="form-group">
+                                    <label >زیرنویس</label>
+                                    <input class="form-control" type="text" name="subtitle"  >
+                                </div>
+                                <div class="form-group">
+                                    <label >متن</label>
+                                    <textarea  class="form-control" name="content"  ></textarea>
+                                </div>
+                                <input type="submit" value="ثبت" class="btn btn-primary">
+
+                            </form>
+                    </div>
+            `
+        );
+    }
+    $(document).ready(function () {
+       getAllUserSkills();
+       getAllSkills();
+
+    });
+
+    newSkillForm.on("submit",function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: base_url+"/dashboard/skill/new",
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.status=='ok'){
+                    iziToast.success({
+                        title: 'OK',
+                        message: 'اطلاعات با موفقیت ثبت شد!',
+                    });
+                    getAllSkills();
+                }else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'خطایی در ثبت اطلاعات رخ داد.',
+                    });
+                }
+
+            }
+        });
+    });
+
+</script>
+{{> admin/footer}}

@@ -1,0 +1,335 @@
+{{> admin/header}}
+{{> admin/topbar}}
+{{> admin/sidebar}}
+
+
+
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    {{> admin/breadcrumb}}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-body">
+                <!--<h4 class="card-title">ویرایش پست</h4>-->
+                <form action="{{base_url}}/dashboard/posts" id="newPostForm" class="row" method="post">
+
+                    <!--<input type="hidden" name="defaultPic" id="defaultPic">-->
+                    <div class="col-lg-5 col-sm-12 row">
+                        <div id="postThumbnail" class="form-group  col-sm-12">
+                            <div class="custom-file-container" data-upload-id="thumbnail">
+                                <label class="custom_file_label">
+                                    <a href="javascript:void(0)" class="custom-file-container__image-clear btn btn-danger" id="imageClear" title="Clear Image">x</a>
+                                    تصویر پست
+
+                                </label>
+                                <label class="custom-file-container__custom-file" >
+                                    <input type="file" class="custom-file-container__custom-file__custom-file-input"  accept="image/*" name="post_thumbnail">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                    <span style="visibility: hidden" class="custom-file-container__custom-file__custom-file-control"></span>
+                                    <div class="custom-file-container__image-preview" ></div>
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="form-group   col-12">
+                            <label for="title">عنوان پست</label>
+                            <input class="form-control" type="text" name="post_title" id="title">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-12 row mt-4" >
+                        <div style="max-height: 50px" class="form-group col-lg-6 col-sm-12">
+                            <label for="slug">نامک پست</label>
+                            <input class="form-control" type="text" name="post_slug" id="slug">
+                        </div>
+                        <div class="form-group col-lg-6  col-sm-12">
+                            <label class="control-label" for="category">دسته بندی</label>
+                            <select class="selectpicker form-control"  name="post_categories[]" id="category" multiple>
+                                {{#post_categories}}
+                                <option value="{{cat_id}}">{{cat_title}}</option>
+                                {{/post_categories}}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="preview_text">متن پیش نمایش</label>
+                            <textarea class="form-control" rows="9"  name="preview_text" id="preview_text"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                            <textarea name="post_content" style="width:100%; height:400px;" class="sun-eidtor sun-editor-editable"   id="editor">
+                                <h1 style="text-align: center">متن پست در اینجا قرار می گیرد</h1>
+
+                            </textarea>
+                    </div>
+                    <!--<textarea name="post_content" id="post_content" cols="30" rows="10"></textarea>-->
+                    <input type="submit" class="btn btn-primary" value="ارسال">
+                </form>
+
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card card-body">
+                <h4 class="card-title">مقالات من</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">تصویر پست</th>
+                                <th scope="col">عنوان پست</th>
+                                <th scope="col">نامک پست</th>
+                                <th scope="col">خلاصه متن</th>
+                                <th scope="col">برچسب ها</th>
+                                <th scope="col">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="posts-wrapper">
+                            {{#posts}}
+                                <tr>
+                                    <td>
+                                        <img src="public/images/posts/{{post_thumbnail}}" alt="{{post_title}}">
+                                    </td>
+                                    <td>{{post_title}}</td>
+                                    <td>{{post_slug}}</td>
+                                    <td style="width: 30%;">{{preview_text}}</td>
+                                    <td style="width: 20%">{{tags}}</td>
+                                    <td>
+                                        <a href="dashboard/posts/edit/{{post_id}}" class="btn btn-primary" )">ویرایش</a>
+                                        <button class="btn btn-danger" onclick="deletePost('{{post_id}}')">
+                                            حذف
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/posts}}
+                        </tbody>
+                    </table>
+                </div>
+                <nav  aria-label="Page navigation example">
+
+                    <ul class="pagination" id="posts-pagination">
+                        {{^firstPage}}
+                        <li class="page-item">
+                            <a class="page-link" href="{{prevUrl}}">
+                                &laquo;
+                            </a>
+                        </li>
+                        {{/firstPage}}
+                        {{#pages}}
+
+                        {{^active}}
+                        <li class="page-item">
+                            <a class="page-link" href="{{url}}">{{title}}</a>
+                        </li>
+                        {{/active}}
+                        {{#active}}
+                        <li class="active page-item">
+                            <a class="page-link" href="{{url}}">{{title}}</a>
+                        </li>
+                        {{/active}}
+                        {{/pages}}
+                        {{^lastPage}}
+                        <li class="page-item">
+                            <a class="page-link" href="{{nextUrl}}">
+                                &raquo;
+                            </a>
+                        </li>
+                        {{/lastPage}}
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="public/dist/js/jodit.min.js"></script>-->
+
+<script src="public/dist/js/suneditor.min.js"></script>
+<script src="public/dist/js/file-upload-with-preview.min.js"></script>
+<script src="public/dist/js/bootstrap-select.min.js"></script>
+<script src="public/dist/js/iziToast.min.js"></script>
+<script>
+    var base_url=document.querySelector("base").getAttribute("href");
+    function showPostsPagination(paginationData, el) {
+        console.log(paginationData);
+        let output="";
+
+        if (!paginationData.firstPage){
+            output+=`
+                    <li class="page-item">
+                        <a class="page-link" href="${paginationData.prevUrl}">
+                            &laquo;
+                        </a>
+                    </li>
+            `;
+
+        }
+        if (paginationData['pages'] ){
+            let pages=paginationData['pages'];
+            Object.keys(pages).map(function(key, index){
+                if(pages[key].active){
+                    output+=`
+                    <li class="page-item active">
+                        <a class="page-link" href="${pages[key].url}">${pages[key].title}</a>
+                    </li>
+                `;
+                }else {
+                    output+=`
+                    <li class="page-item">
+                        <a class="page-link" href="${pages[key].url}">${pages[key].title}</a>
+                    </li>
+                `;
+                }
+            });
+
+
+        }
+        if (!paginationData.lastPage){
+            console.log(paginationData.is_last_page);
+            output+=`
+                    <li class="page-item">
+                        <a class="page-link" href="${paginationData.nextUrl}">
+                            &raquo;
+                        </a>
+                    </li>
+            `;
+        }
+        el.html(output);
+    }
+    function showPosts(data,el) {
+        var output="";
+        for (post of data){
+            output+="<tr>";
+            if(post.post_thumbnail){
+                output+=`<td><img class="img-circle" src='public/images/projects/${post.post_thumbnail}' alt=''></td>`;
+            }else {
+                output+=`<td><img class="img-circle" src=http://localhost/picfaker/?width=150&height=150' alt=''></td>`;
+            }
+            output+=`<td>${post.post_title}</td>`;
+            output+=`<td>${post.post_slug}</td>`;
+            output+=`<td style="width: 30%;">${post.preview_text}</td>`;
+            output+=`<td>${post.tags}</td>`;
+            output+=`
+                <td>
+                     <a href="dashboard/posts/edit/${post.post_id}" class="btn btn-primary" )">ویرایش</a>
+                     <button class="btn btn-danger" onclick="deletePost('${post.post_id}')">
+                                                حذف
+                     </button>
+                </td>
+            `;
+
+            output+="</tr>";
+        }
+        el.html(output);
+    }
+    function getAllPosts() {
+        let urlToGo="";
+        let urlArr=window.location.pathname.split("/");
+        if (urlArr[4]){
+            urlToGo=base_url+"dashboard/"+urlArr[3]+"/"+urlArr[4]+"/json";
+        }else {
+            urlToGo=base_url+"dashboard/"+urlArr[3]+"/json";
+        }
+        $.get(urlToGo,function (data) {
+            data=JSON.parse(data);
+            showPosts(data.posts,$("#posts-wrapper"));
+            showPostsPagination(data.pagination,$("#posts-pagination"));
+        })
+    }
+    function deletePost(post_id) {
+        if (confirm("واقعا می خوای این پست رو پاک کنی؟")){
+            $.ajax({
+                url: base_url+"dashboard/posts"+"/"+post_id,
+                type: 'DELETE',
+                beforeSend: function (e) {
+
+                },
+                success: function (data) {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    if (data.status=='ok'){
+                        iziToast.success({
+                            message: 'پست با موفقیت حذف شد!',
+                        });
+                        getAllPosts();
+                    }else {
+                        iziToast.error({
+
+                            message: 'در ثبت اطلاعات خطایی رخ داد',
+                        });
+                    }
+
+                }
+            });
+        }else {
+            iziToast.warning({
+
+                message: 'در ثبت اطلاعات خطایی رخ داد',
+            });
+        }
+    }
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    var suneditor = SUNEDITOR.create('editor',{
+        imageUploadUrl:base_url+"/dashboard/editor/uploadImage.ajax"
+    });
+    $('.selectpicker').selectpicker({
+        noneSelectedText:"هیچ چیزی انتخاب نشده است"
+    });
+    $("#newPostForm").on("submit",function (e) {
+        e.preventDefault();
+//        $("#post_content").html(suneditor.getContent());
+//        let postTextContent=suneditor.getContent();
+//        let previewText="";
+//        postTextContent=postTextContent.replace(/\w+<\/[^>]+>/g,"<br>");
+//        postTextContent = postTextContent.replace(/<(?!\/?br(?=>|\s.*>))\/?.*?>/g,"");
+//        if (postTextContent.length>200){
+//            previewText=postTextContent.substr(0,200);
+//        }else {
+//            previewText=postTextContent;
+//        }
+//        console.log(previewText);
+//        $(this).find("#preview_text").html(previewText);
+        suneditor.save();
+        var formData=new FormData($(this)[0]);
+
+        $.ajax({
+            url: $(this).attr("action"),
+            type: 'POST',
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            // mimeType: "multipart/form-data",
+            beforeSend: function (e) {
+
+            },
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.status=='ok'){
+                    iziToast.success({
+                        message: 'اطلاعات با موفقیت ثبت شد!',
+                    });
+                    getAllPosts();
+                }else {
+                    iziToast.error({
+
+                        message: 'در ثبت اطلاعات خطایی رخ داد',
+                    });
+                }
+
+            }
+        });
+    });
+
+    var firstUpload = new FileUploadWithPreview('thumbnail');
+    var clearBtn=document.querySelector(".custom-file-container__image-clear");
+
+</script>
+{{> admin/footer}}
