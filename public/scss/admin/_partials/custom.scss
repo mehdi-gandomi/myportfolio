@@ -179,6 +179,18 @@ span{
 }
 
 //posts management page
+#postThumbnail{
+  display: flex;
+  flex-direction: column;
+}
+.thumbnail-preview{
+  width: 80%;
+  margin: auto;
+  height: 200px;
+  background-image: url("../../../images/placeholder.png");
+  background-size: cover;
+  cursor: pointer;
+}
 #posts-wrapper{
   tr{
     td {

@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: "custom-font";
-  src:url("fonts/custom-font.eot");
-  src:url("fonts/custom-font.eot?#iefix") format("embedded-opentype"),
-  url("fonts/custom-font.woff") format("woff"),
-  url("fonts/custom-font.ttf") format("truetype"),
-  url("fonts/custom-font.svg#custom-font") format("svg");
+  src:url("../../fonts/custom-font.eot");
+  src:url("../../fonts/custom-font.eot?#iefix") format("embedded-opentype"),
+  url("../../fonts/custom-font.woff") format("woff"),
+  url("../../fonts/custom-font.ttf") format("truetype"),
+  url("../../fonts/custom-font.svg#custom-font") format("svg");
   font-weight: normal;
   font-style: normal;
 
