@@ -20,11 +20,11 @@ class Dashboard extends \Core\Controller {
 
     protected function before()
     {
-        session_start();
-
-        if (!isset($_SESSION['id']) || $_SESSION['id']==false){
-            self::redirect_to(Config::BASE_URL."/dashboard/login");
-        }
+//        session_start();
+//
+//        if (!isset($_SESSION['id']) || $_SESSION['id']==false){
+//            self::redirect_to(Config::BASE_URL."/dashboard/login");
+//        }
     }
 
     public function AllComments(){
@@ -793,7 +793,6 @@ class Dashboard extends \Core\Controller {
 
         }
     }
-
     public function ajaxImageUploadAction(){
         $uploadedImages=[];
         for ($i=0;$i<count($_FILES);$i++){
@@ -813,6 +812,71 @@ class Dashboard extends \Core\Controller {
     }
 
 
+//    file manager functions
+
+    public function fileManagerAction(){
+        if ($_SERVER['REQUEST_METHOD']=="GET"){
+            $finalPath=isset($_GET['route']) ? $this->join_paths("public/images/uploads",$_GET['route']):"public/images/uploads";
+            $dirs=$this->list_directory($finalPath);
+            echo "<input id='current-path' type='hidden' value='$finalPath'>";
+
+            if ($dirs){
+              foreach ($dirs as $dir){
+                  $baseName=pathinfo($dir,PATHINFO_BASENAME);
+                  if (is_dir($dir)){
+                      echo "
+                           <div class='folder'>
+                                <a href='$baseName'>
+                                    <i class='icon-folder'></i>
+                                </a>
+                                <label class='control control--checkbox'>$baseName
+                                    <input type='checkbox'  id='$baseName' name='folders[]'>
+                                    <div class='control__indicator'></div>
+                                </label>
+                            </div>
+
+                      ";
+                  }
+                  else if (in_array(pathinfo($dir,PATHINFO_EXTENSION),['png','jpg','bmp','jpeg'])){
+
+
+                      echo "
+                            <div class='file'>
+                                <a href='#'>
+                                    <img src='$dir' class='image-file' alt='$baseName'>
+                                </a>
+                                <label class='control control--checkbox'>$baseName
+                                    <input type='checkbox' id='$baseName' name='files[]'>
+                                    <div class='control__indicator'></div>
+                                </label>
+                            </div>
+                      ";
+                  }
+              }
+            }
+
+        }
+    }
+
+    private function list_directory($path="public/images/uploads"){
+        if (file_exists($path)){
+            $dirs=scandir($path);
+            $dirs=array_diff($dirs, [".", ".."]);
+            usort ($dirs, function ($a,$b) {
+                return is_dir($a)
+                    ? (is_dir($b) ? strnatcasecmp($a, $b) : -1)
+                    : (is_dir($b) ? 1 : (
+                    strcasecmp(pathinfo($a, PATHINFO_EXTENSION), pathinfo($b, PATHINFO_EXTENSION)) == 0
+                        ? strnatcasecmp($a, $b)
+                        : strcasecmp(pathinfo($a, PATHINFO_EXTENSION), pathinfo($b, PATHINFO_EXTENSION))
+                    ));
+            });
+            $dirs=array_map(function ($dir) use ($path){return $this->join_paths($path,$dir);},$dirs );
+            return $dirs;
+        }
+        return false;
+
+    }
     private function create_pagination($pages_count,$base_url="dashboard/comment/")
     {
         $output=[];

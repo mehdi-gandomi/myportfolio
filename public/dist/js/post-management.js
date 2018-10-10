@@ -179,3 +179,12 @@ $("#newPostForm").on("submit",function (e) {
 });
 
 var clearBtn=document.querySelector(".custom-file-container__image-clear");
+
+function listAllDirectories() {
+    $.get("dashboard/file-manager",function (data) {
+       $("#file-management-form").html(data);
+    });
+}
+$("#file-manager").on("show.bs.modal",function (e) {
+    listAllDirectories();
+});

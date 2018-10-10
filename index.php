@@ -54,6 +54,7 @@ $router->add('dashboard/posts/json', ['controller' => 'Dashboard', 'action' => '
 $router->add('dashboard/posts/{page:\d+}/json', ['controller' => 'Dashboard', 'action' => 'postsJson']);
 $router->add('dashboard/login', ['controller' => 'DashboardLogin', 'action' => 'index']);
 $router->add('dashboard/editor/uploadImage.ajax', ['controller' => 'Dashboard', 'action' => 'ajaxImageUpload']);
+$router->add('dashboard/file-manager', ['controller' => 'Dashboard', 'action' => 'fileManager']);
 $url=$_SERVER['QUERY_STRING'];
 $router->dispatch($_SERVER['QUERY_STRING']);
 ?>
