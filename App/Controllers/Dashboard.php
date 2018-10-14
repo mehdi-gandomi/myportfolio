@@ -817,8 +817,10 @@ class Dashboard extends \Core\Controller {
     public function fileManagerAction(){
         if ($_SERVER['REQUEST_METHOD']=="GET"){
             $finalPath=isset($_GET['route']) ? $_GET['route']:"public/images/uploads";
-            $back=isset($_GET['back']);
-            $dirs=$this->list_directory($finalPath,$back);
+            if (isset($_GET['back'])){
+                $finalPath=dirname($finalPath);
+            }
+            $dirs=$this->list_directory($finalPath);
             echo "<input id='current-path' type='hidden' value='$finalPath'>";
 
             if (count($dirs)>=1){
@@ -897,10 +899,8 @@ class Dashboard extends \Core\Controller {
 
     }
 
-    private function list_directory($path="public/images/uploads",$back=false){
-        if ($back){
-            $path=dirname($path);
-        }
+    private function list_directory($path="public/images/uploads"){
+
         if (file_exists($path)){
             $dirs=scandir($path);
             $dirs=array_diff($dirs, [".", ".."]);
