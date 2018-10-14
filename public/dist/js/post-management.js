@@ -188,3 +188,56 @@ function listAllDirectories() {
 $("#file-manager").on("show.bs.modal",function (e) {
     listAllDirectories();
 });
+
+$(document).on("click",".folder a",function (e) {
+   e.preventDefault();
+   let folderPath=e.currentTarget.getAttribute("href");
+   $.get(base_url+"dashboard/file-manager",{"route":folderPath},function (data) {
+      $("#file-management-form").html(data);
+   });
+});
+$("#button-parent").click(function (e) {
+    e.preventDefault();
+    let curPath=$("#current-path").val();
+    $.get(base_url+"dashboard/file-manager",{"route":curPath,"back":true},function (data) {
+        $("#file-management-form").html(data);
+    })
+});
+$("#button-refresh").click(function (e) {
+    e.preventDefault();
+    let curPath=$("#current-path").val();
+    $.get(base_url+"dashboard/file-manager",{"route":curPath},function (data) {
+        $("#file-management-form").html(data);
+    })
+});
+$("#folder-create-btn").click(function (e) {
+    let folderName=$("input[name='folder']").val();
+    let curPath=$("#current-path").val();
+    $.ajax({
+        url: base_url+"dashboard/file-manager",
+        type: 'POST',
+        data:{
+            'folder':folderName,
+            'current_path':curPath
+        },
+        beforeSend: function (e) {
+
+        },
+        success: function (data) {
+            console.log(data);
+            data = JSON.parse(data);
+            if (data.status=='ok'){
+                iziToast.success({
+                    message: 'پوشه با موفقیت ایجاد شد!',
+                });
+                getAllPosts();
+            }else {
+                iziToast.error({
+
+                    message: 'در ایجاد پوشه خطایی رخ داد!',
+                });
+            }
+
+        }
+    });
+});

@@ -816,18 +816,19 @@ class Dashboard extends \Core\Controller {
 
     public function fileManagerAction(){
         if ($_SERVER['REQUEST_METHOD']=="GET"){
-            $finalPath=isset($_GET['route']) ? $this->join_paths("public/images/uploads",$_GET['route']):"public/images/uploads";
-            $dirs=$this->list_directory($finalPath);
+            $finalPath=isset($_GET['route']) ? $_GET['route']:"public/images/uploads";
+            $back=isset($_GET['back']);
+            $dirs=$this->list_directory($finalPath,$back);
             echo "<input id='current-path' type='hidden' value='$finalPath'>";
 
-            if ($dirs){
+            if (count($dirs)>=1){
               foreach ($dirs as $dir){
                   $baseName=pathinfo($dir,PATHINFO_BASENAME);
                   if (is_dir($dir)){
                       echo "
                            <div class='folder'>
-                                <a href='$baseName'>
-                                    <i class='icon-folder'></i>
+                                <a href='$dir'>
+                                    <i class='i-folder'></i>
                                 </a>
                                 <label class='control control--checkbox'>$baseName
                                     <input type='checkbox'  id='$baseName' name='folders[]'>
@@ -853,12 +854,53 @@ class Dashboard extends \Core\Controller {
                       ";
                   }
               }
+            }else{
+                echo "<h4 style='grid-column: 1/6;' class='text-center'>در این پوشه فایلی وجود ندارد:(</h4>";
             }
 
         }
+        else if ($_SERVER['REQUEST_METHOD']=="POST"){
+            if ($_FILES){
+
+            }else{
+                $folderName=mb_convert_encoding($_POST['folder'],"UTF-8");
+                $path=$_POST['current_path'];
+                $full_path=$this->join_paths($path,$folderName);
+                if (!file_exists($full_path)){
+                    try{
+
+//                        shell_exec("mkdir $full_path");
+                        mkdir($full_path);
+                        echo json_encode(
+                            array(
+                                'status'=>'ok'
+                            )
+                        );
+                    }catch (\Exception $e){
+                        echo json_encode(
+                            array(
+                                'status'=>'error',
+                                'error'=>$e
+                            )
+                        );
+                    }
+                }else{
+                    echo json_encode(
+                        array(
+                            'status'=>'ok'
+                        )
+                    );
+                }
+
+            }
+        }
+
     }
 
-    private function list_directory($path="public/images/uploads"){
+    private function list_directory($path="public/images/uploads",$back=false){
+        if ($back){
+            $path=dirname($path);
+        }
         if (file_exists($path)){
             $dirs=scandir($path);
             $dirs=array_diff($dirs, [".", ".."]);
@@ -926,6 +968,44 @@ class Dashboard extends \Core\Controller {
         }
 
         return preg_replace('#/+#','/',join('/', $paths));
+    }
+
+    private function get_os() {
+
+        $user_agent=$_SERVER['HTTP_USER_AGENT'];
+        $os_platform  = "Unknown OS Platform";
+
+        $os_array     = array(
+            '/windows nt 10/i'      =>  'Windows 10',
+            '/windows nt 6.3/i'     =>  'Windows 8.1',
+            '/windows nt 6.2/i'     =>  'Windows 8',
+            '/windows nt 6.1/i'     =>  'Windows 7',
+            '/windows nt 6.0/i'     =>  'Windows Vista',
+            '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
+            '/windows nt 5.1/i'     =>  'Windows XP',
+            '/windows xp/i'         =>  'Windows XP',
+            '/windows nt 5.0/i'     =>  'Windows 2000',
+            '/windows me/i'         =>  'Windows ME',
+            '/win98/i'              =>  'Windows 98',
+            '/win95/i'              =>  'Windows 95',
+            '/win16/i'              =>  'Windows 3.11',
+            '/macintosh|mac os x/i' =>  'Mac OS X',
+            '/mac_powerpc/i'        =>  'Mac OS 9',
+            '/linux/i'              =>  'Linux',
+            '/ubuntu/i'             =>  'Ubuntu',
+            '/iphone/i'             =>  'iPhone',
+            '/ipod/i'               =>  'iPod',
+            '/ipad/i'               =>  'iPad',
+            '/android/i'            =>  'Android',
+            '/blackberry/i'         =>  'BlackBerry',
+            '/webos/i'              =>  'Mobile'
+        );
+
+        foreach ($os_array as $regex => $value)
+            if (preg_match($regex, $user_agent))
+                $os_platform = $value;
+
+        return $os_platform;
     }
     protected function after()
     {

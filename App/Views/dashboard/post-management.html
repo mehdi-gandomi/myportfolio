@@ -148,13 +148,18 @@
                     <div class="row toolbar">
                         <div class="col-sm-5 dir-operations">
                             <a href="#" id="button-parent" class="btn btn-default hint--top" aria-label="پوشه قبلی"><i
-                                    class="icon-level-up"></i></a>
+                                    class="i-level-up"></i></a>
                             <a href="#" id="button-refresh" class="btn btn-default hint--top" aria-label="رفرش"><i
-                                    class="icon-refresh"></i></a>
-                            <button type="button" id="button-upload" class="btn btn-primary hint--top" aria-label="آپلود عکس"><i
-                                    class="icon-upload"></i></button>
+                                    class="i-refresh"></i></a>
+                            <form  action="" class="upload-img-form d-inline-block ">
+                                <label for="img-upload" class="btn btn-primary hint--top m-0" aria-label="آپلود عکس">
+                                    <i class="i-upload"></i>
+
+                                    <input class="d-none" type="file" id="img-upload" name="images[]" multiple>
+                                </label>
+                            </form>
                             <button type="button" id="new-folder-btn" class="btn btn-success hint--top" aria-label="پوشه جدید"><i
-                                    class="icon-folder-add"></i></button>
+                                    class="i-folder-add"></i></button>
                             <form class="popover newFolderForm" role="tooltip">
                                 <div class="arrow"></div>
                                 <h5>پوشه جدید</h3>
@@ -163,21 +168,21 @@
                                        
                                         <input type="text" name="folder" value="" placeholder="نام پوشه" class="form-control"> 
                                         <span class="input-group-btn">
-                                                <button type="button" title="New Folder" id="button-create" class="btn btn-primary"><i class="icon-plus-circle"></i></button>
+                                                <button type="button" title="New Folder" id="folder-create-btn" class="btn btn-primary"><i class="i-plus-circle"></i></button>
                                         </span>
                                             
                                     </div>
                                 </div>
                             </form>
                             <button type="button" id="button-delete" class="btn btn-danger hint--top" aria-label="حذف فایل"><i
-                                    class="icon-trash"></i></button>
+                                    class="i-trash"></i></button>
                         </div>
                         <div class="col-sm-7">
                             <div class="input-group">
                                 <input type="text" name="search" value="" placeholder="Search.." class="form-control">
                                 <span class="input-group-btn">
                                     <button type="button" data-toggle="tooltip" title="" id="button-search" class="btn btn-primary"
-                                        data-original-title="Search"><i class="icon-search"></i></button>
+                                        data-original-title="Search"><i class="i-search"></i></button>
                                 </span>
                             </div>
                         </div>
