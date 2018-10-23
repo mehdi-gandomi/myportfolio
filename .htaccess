@@ -1,8 +1,10 @@
 RewriteEngine on
 RewriteBase /
+Options -Indexes
 RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
 RewriteRule ^(.*)$ public/$1 [L]
-RewriteCond %{THE_REQUEST} \s/public/ [NC,OR]
+RedirectMatch ^/static/(.*) /public/$1
+#RewriteCond %{THE_REQUEST} \s/public/ [NC,OR]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ coderguy/index.php?$1 [L,QSA]

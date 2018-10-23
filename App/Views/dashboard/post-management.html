@@ -151,13 +151,10 @@
                                     class="i-level-up"></i></a>
                             <a href="#" id="button-refresh" class="btn btn-default hint--top" aria-label="رفرش"><i
                                     class="i-refresh"></i></a>
-                            <form  action="" class="upload-img-form d-inline-block ">
-                                <label for="img-upload" class="btn btn-primary hint--top m-0" aria-label="آپلود عکس">
-                                    <i class="i-upload"></i>
-
-                                    <input class="d-none" type="file" id="img-upload" name="images[]" multiple>
-                                </label>
-                            </form>
+                            <label for="img-upload" class="btn btn-primary hint--top m-0" aria-label="آپلود عکس">
+                                <i class="i-upload"></i>
+                                <input class="d-none" type="file" id="img-upload" name="images[]" multiple>
+                            </label>
                             <button type="button" id="new-folder-btn" class="btn btn-success hint--top" aria-label="پوشه جدید"><i
                                     class="i-folder-add"></i></button>
                             <form class="popover newFolderForm" role="tooltip">
@@ -188,7 +185,23 @@
                         </div>
                     </div>
                     <div class="directory-wrapper">
-                        <form id="file-management-form"></form>
+                        <form id="file-management-form">
+                        <div class="sk-fading-circle">
+                            <div class="sk-circle1 sk-circle"></div>
+                            <div class="sk-circle2 sk-circle"></div>
+                            <div class="sk-circle3 sk-circle"></div>
+                            <div class="sk-circle4 sk-circle"></div>
+                            <div class="sk-circle5 sk-circle"></div>
+                            <div class="sk-circle6 sk-circle"></div>
+                            <div class="sk-circle7 sk-circle"></div>
+                            <div class="sk-circle8 sk-circle"></div>
+                            <div class="sk-circle9 sk-circle"></div>
+                            <div class="sk-circle10 sk-circle"></div>
+                            <div class="sk-circle11 sk-circle"></div>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                        </form>
+                        
                     </div>
 
 
@@ -198,10 +211,10 @@
             </div>
         </div>
     </div>
-<!--<script src="public/dist/js/jodit.min.js"></script>-->
+<!--<script src="public/js/admin/jodit.min.js"></script>-->
 
-<script src="public/dist/js/suneditor.min.js"></script>
-<script src="public/dist/js/bootstrap-select.min.js"></script>
-<script src="public/dist/js/iziToast.min.js"></script>
-<script src="public/dist/js/post-management.js"></script>
+<script src="public/js/admin/suneditor.min.js"></script>
+<script src="public/js/admin/bootstrap-select.min.js"></script>
+<script src="public/js/iziToast.min.js"></script>
+<script src="public/js/admin/post-management.js"></script>
 {{> admin/footer}}

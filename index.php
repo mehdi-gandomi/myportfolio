@@ -15,7 +15,6 @@ if (is_readable($file)){
 set_error_handler('Core\Error::errorHandler');
 set_exception_handler('Core\Error::exceptionHandler');
 $router=new Core\Router();
-
 $router->add('',['controller'=>'Home','action'=>'index']);
 $router->add('about-me', ['controller' => 'About', 'action' => 'index']);
 $router->add('my-portfolio', ['controller' => 'Portfolio', 'action' => 'index']);
@@ -57,5 +56,6 @@ $router->add('dashboard/editor/uploadImage.ajax', ['controller' => 'Dashboard', 
 $router->add('dashboard/file-manager', ['controller' => 'Dashboard', 'action' => 'fileManager']);
 $url=$_SERVER['QUERY_STRING'];
 $router->dispatch($_SERVER['QUERY_STRING']);
+
 ?>
 

@@ -180,10 +180,14 @@ $("#newPostForm").on("submit",function (e) {
 
 var clearBtn=document.querySelector(".custom-file-container__image-clear");
 
-function listAllDirectories() {
-    $.get("dashboard/file-manager",function (data) {
-       $("#file-management-form").html(data);
-    });
+function listAllDirectories(route) {
+    if(route===undefined){
+        route="public/images/uploads";
+    }
+    $.get(base_url+"dashboard/file-manager",{"route":route},function (data) {
+        $("#file-management-form").html(data);
+    });    
+    
 }
 $("#file-manager").on("show.bs.modal",function (e) {
     listAllDirectories();
@@ -192,16 +196,13 @@ $("#file-manager").on("show.bs.modal",function (e) {
 $(document).on("click",".folder a",function (e) {
    e.preventDefault();
    let folderPath=e.currentTarget.getAttribute("href");
-   $.get(base_url+"dashboard/file-manager",{"route":folderPath},function (data) {
-      $("#file-management-form").html(data);
-   });
+  listAllDirectories(folderPath);
 });
 $("#button-parent").click(function (e) {
     e.preventDefault();
     let curPath=$("#current-path").val();
-    $.get(base_url+"dashboard/file-manager",{"route":curPath,"back":true},function (data) {
-        $("#file-management-form").html(data);
-    })
+    curPath=curPath.substring(0,curPath.lastIndexOf("/"));
+    listAllDirectories(curPath);
 });
 $("#button-refresh").click(function (e) {
     e.preventDefault();
@@ -230,7 +231,9 @@ $("#folder-create-btn").click(function (e) {
                 iziToast.success({
                     message: 'پوشه با موفقیت ایجاد شد!',
                 });
-                getAllPosts();
+                $(".newFolderForm").removeClass("show");
+                listAllDirectories(curPath);
+
             }else {
                 iziToast.error({
 
@@ -241,3 +244,81 @@ $("#folder-create-btn").click(function (e) {
         }
     });
 });
+// deleteBtn=document.querySelector("#button-delete");
+$("#button-delete").on("click",function(){
+    if(confirm("واقعا می خوای موارد انتخابی رو پاک کنی؟")){
+        let curPath=$("#current-path").val();
+        $.ajax({
+            url: base_url+"dashboard/file-manager",
+            type: 'DELETE',
+            data:$("#file-management-form").serialize(),
+            beforeSend: function (e) {
+
+            },
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.status=='ok'){
+                    iziToast.success({
+                        message: 'موارد انتخابی با موفقیت حذف شدند!',
+                    });
+                    listAllDirectories(curPath);
+                }else {
+                    iziToast.error({
+
+                        message: ' خطایی رخ داد',
+                    });
+                }
+
+            }
+        });     
+    }else{
+
+    }
+});
+var files;
+$("#img-upload").on("change",function(e){
+    files = e.target.files;
+    
+    var data = new FormData();
+    $.each(files, function(key, value)
+    {
+        data.append(key, value);
+    });
+    let curPath=$("#current-path").val();
+    data.append("current_path",curPath);
+
+    $.ajax({
+        url: base_url+"dashboard/file-manager",
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function(data, textStatus, jqXHR)
+        {
+            console.log(data);
+            if (data.status=='ok'){
+                iziToast.success({
+                    message: 'اطلاعات با موفقیت ثبت شد!',
+                });
+                listAllDirectories(curPath);
+            }else {
+                iziToast.error({
+
+                    message: 'در ثبت اطلاعات خطایی رخ داد',
+                });
+            }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            console.log('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
+    });
+
+})
+    

@@ -817,12 +817,10 @@ class Dashboard extends \Core\Controller {
     public function fileManagerAction(){
         if ($_SERVER['REQUEST_METHOD']=="GET"){
             $finalPath=isset($_GET['route']) ? $_GET['route']:"public/images/uploads";
-            if (isset($_GET['back'])){
-                $finalPath=dirname($finalPath);
-            }
             $dirs=$this->list_directory($finalPath);
+            
             echo "<input id='current-path' type='hidden' value='$finalPath'>";
-
+            
             if (count($dirs)>=1){
               foreach ($dirs as $dir){
                   $baseName=pathinfo($dir,PATHINFO_BASENAME);
@@ -833,7 +831,7 @@ class Dashboard extends \Core\Controller {
                                     <i class='i-folder'></i>
                                 </a>
                                 <label class='control control--checkbox'>$baseName
-                                    <input type='checkbox'  id='$baseName' name='folders[]'>
+                                    <input type='checkbox'  id='$baseName' name='folders[]' value='$dir'>
                                     <div class='control__indicator'></div>
                                 </label>
                             </div>
@@ -849,7 +847,7 @@ class Dashboard extends \Core\Controller {
                                     <img src='$dir' class='image-file' alt='$baseName'>
                                 </a>
                                 <label class='control control--checkbox'>$baseName
-                                    <input type='checkbox' id='$baseName' name='files[]'>
+                                    <input type='checkbox' id='$baseName' name='files[]' value='$dir'>
                                     <div class='control__indicator'></div>
                                 </label>
                             </div>
@@ -863,15 +861,33 @@ class Dashboard extends \Core\Controller {
         }
         else if ($_SERVER['REQUEST_METHOD']=="POST"){
             if ($_FILES){
-
+                $path=$_POST['current_path'];
+                try{
+                    foreach($_FILES as $file){
+                        $target_file=$this->join_paths($path,$file['name']);
+                        if (!file_exists($target_file)){
+                            move_uploaded_file($file['tmp_name'], $target_file);
+                        }
+                    }
+                    echo json_encode(
+                        array(
+                            'status'=>'ok'
+                        )
+                    );
+                }catch(\Exception $e){
+                    echo json_encode(
+                        array(
+                            'status'=>'error',
+                            'error'=>$e
+                        )
+                    );
+                }
             }else{
                 $folderName=mb_convert_encoding($_POST['folder'],"UTF-8");
                 $path=$_POST['current_path'];
                 $full_path=$this->join_paths($path,$folderName);
                 if (!file_exists($full_path)){
                     try{
-
-//                        shell_exec("mkdir $full_path");
                         mkdir($full_path);
                         echo json_encode(
                             array(
@@ -896,9 +912,45 @@ class Dashboard extends \Core\Controller {
 
             }
         }
+        else if($_SERVER['REQUEST_METHOD']=="DELETE"){
+            parse_str(file_get_contents("php://input"), $post_vars);
+            try{
+                if(isset($post_vars['folders'])){
+                    foreach($post_vars['folders'] as $folder ){
+                        $this->removeDirectory($folder);
+                    }
+                }
+                if(isset($post_vars['files'])){
+                    foreach($post_vars['files'] as $file ){
+                        unlink($file);
+                    }
+                }
+                echo json_encode(
+                    array(
+                        'status'=>'ok'
+                    )
+                );
+            }catch(\Exception $e){
+                echo json_encode(
+                    array(
+                        'status'=>'error',
+                        'error'=>$e
+                    )
+                );
+            }
+            
+        }
 
     }
-
+    private function  removeDirectory($path) {
+        $files = glob($path . '/*');
+         if($files){
+             foreach ($files as $file) {
+                 is_dir($file) ? removeDirectory($file) : unlink($file);
+             }
+         }
+        rmdir($path);   
+    }
     private function list_directory($path="public/images/uploads"){
 
         if (file_exists($path)){
@@ -1012,3 +1064,4 @@ class Dashboard extends \Core\Controller {
 
     }
 }
+
