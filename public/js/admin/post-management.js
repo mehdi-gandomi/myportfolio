@@ -53,7 +53,7 @@ function showPosts(data,el) {
     for (post of data){
         output+="<tr>";
         if(post.post_thumbnail){
-            output+=`<td><img class="img-circle" src='public/images/projects/${post.post_thumbnail}' alt=''></td>`;
+            output+=`<td><img class="img-circle" src='${post.post_thumbnail}' alt=''></td>`;
         }else {
             output+=`<td><img class="img-circle" src=http://localhost/picfaker/?width=150&height=150' alt=''></td>`;
         }
@@ -276,9 +276,9 @@ $("#button-delete").on("click",function(){
 
     }
 });
-var files;
+
 $("#img-upload").on("change",function(e){
-    files = e.target.files;
+    let files = e.target.files;
     
     var data = new FormData();
     $.each(files, function(key, value)
@@ -322,3 +322,10 @@ $("#img-upload").on("change",function(e){
 
 })
     
+$(document).on("click",".file",function(e){
+    e.preventDefault();
+    thumbnail=e.currentTarget.querySelector("a").getAttribute("href");
+    $("#thumbnail_url").val(thumbnail);
+    $(".thumbnail-preview").css("background-image","url('"+thumbnail+"')");
+    $("#file-manager").modal("hide");
+});

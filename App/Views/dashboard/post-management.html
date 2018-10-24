@@ -24,8 +24,8 @@
                                 تصویر پست
 
                             </label>
-                            <div class="thumbnail-preview" data-toggle="modal" data-target="#file-manager"></div>
-
+                            <div  class="thumbnail-preview" data-toggle="modal" data-target="#file-manager"></div>
+                            <input type="hidden" name="post_thumbnail" id="thumbnail_url">
                         </div>
                         <div class="form-group   col-12">
                             <label for="title">عنوان پست</label>
@@ -82,7 +82,7 @@
                             {{#posts}}
                                 <tr>
                                     <td>
-                                        <img src="public/images/posts/{{post_thumbnail}}" alt="{{post_title}}">
+                                        <img src="{{post_thumbnail}}" alt="{{post_title}}">
                                     </td>
                                     <td>{{post_title}}</td>
                                     <td>{{post_slug}}</td>

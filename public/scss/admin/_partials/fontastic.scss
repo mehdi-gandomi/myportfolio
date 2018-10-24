@@ -1,12 +1,12 @@
-@charset "UTF-8";
+@charset "UTi-8";
 
 @font-face {
   font-family: "custom-font";
   src:url("fonts/custom-font.eot");
   src:url("fonts/custom-font.eot?#iefix") format("embedded-opentype"),
-  url("fonts/custom-font.woff") format("woff"),
-  url("fonts/custom-font.ttf") format("truetype"),
-  url("fonts/custom-font.svg#custom-font") format("svg");
+    url("fonts/custom-font.woff") format("woff"),
+    url("fonts/custom-font.ttf") format("truetype"),
+    url("fonts/custom-font.svg#custom-font") format("svg");
   font-weight: normal;
   font-style: normal;
 
@@ -151,4 +151,10 @@
 }
 .i-plus-square:before {
   content: "\4c";
+}
+.i-bars:before {
+  content: "\4d";
+}
+.i-list:before {
+  content: "\4e";
 }

@@ -46,14 +46,7 @@ class Post extends \Core\Model
     {
         unset($postData['MAX_FILE_SIZE']);
         try{
-            if ($_FILES['post_thumbnail']['name']){
-                $fileName=$_FILES["post_thumbnail"]["name"];
-                $target_file = "public/images/posts/" . $fileName;
-                if (!file_exists($target_file)){
-                    move_uploaded_file($_FILES['post_thumbnail']['tmp_name'], $target_file);
-                }
-                $postData['post_thumbnail']=$fileName;
-            }
+            
             $post_id=self::genCode("posts","post_id");
             $postData['post_id']=$post_id;
             self::insert("posts",$postData,false);
@@ -154,33 +147,9 @@ class Post extends \Core\Model
 
     public static function updatePost($post_id, $postData)
     {
-        unset($postData['MAX_FILE_SIZE']);
-        if ($_FILES['post_thumbnail']['name']){
-            unset($postData['defaultPic']);
-            $fileName=$_FILES["post_thumbnail"]["name"];
-            $target_file = "public/images/posts/" . $fileName;
-            if (!file_exists($target_file)){
-                move_uploaded_file($_FILES['project_image']['tmp_name'], $target_file);
-            }
-            $postData['post_thumbnail']=$fileName;
-            $postCategories=$postData['post_categories'];
-            unset($postData['post_categories']);
-            try{
-                $postData['tags']=static::create_tags_for_post($postCategories);
-                self::update("posts",$postData,"post_id='$post_id'");
-                static::delete_all_post_categories_by_id($post_id);
-                static::insert_post_categories($postData,$postCategories);
-                return true;
-            }catch (\Exception $e){
-                var_dump($e);
-                return false;
-            }
-        }
-        else{
-
             if ($postData['defaultPic']=="yes"){
                 unset($postData['defaultPic']);
-                $postData['post_thumbnail']="default.jpg";
+                $postData['post_thumbnail']="public/images/placeholder.png";
             }else{
                 unset($postData['defaultPic']);
             }
@@ -196,7 +165,7 @@ class Post extends \Core\Model
 
                 return false;
             }
-        }
+        
     }
 
     private static function delete_all_post_categories_by_id($post_id)

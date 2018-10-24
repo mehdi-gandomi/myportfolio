@@ -681,8 +681,8 @@ class Dashboard extends \Core\Controller {
             }
         }
         else if($_SERVER['REQUEST_METHOD']==="DELETE"){
-            if ($this->route_params['post_id']){
-                $res=Post::delete_post_by_id($this->route_params['post_id']);
+            if ($this->route_params['id']){
+                $res=Post::delete_post_by_id($this->route_params['id']);
                 if ($res){
                     echo json_encode(
                         array(
@@ -797,7 +797,7 @@ class Dashboard extends \Core\Controller {
         $uploadedImages=[];
         for ($i=0;$i<count($_FILES);$i++){
             $fileName=$_FILES['file-'.$i]['name'];
-            $target_file=$this->join_paths("public/images/uploads",$fileName);
+            $target_file=$this->join_paths("public/images/uploads/editor",$fileName);
             if (!file_exists($target_file)){
                 move_uploaded_file($_FILES['file-'.$i]['tmp_name'], $target_file);
             }
@@ -843,7 +843,7 @@ class Dashboard extends \Core\Controller {
 
                       echo "
                             <div class='file'>
-                                <a href='#'>
+                                <a href='$dir'>
                                     <img src='$dir' class='image-file' alt='$baseName'>
                                 </a>
                                 <label class='control control--checkbox'>$baseName

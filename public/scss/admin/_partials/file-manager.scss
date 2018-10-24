@@ -30,7 +30,9 @@
 .directory-wrapper form {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  margin-top: 2rem
+  margin-top: 2rem;
+  grid-gap: 1em;
+
 }
 
 .folder {
