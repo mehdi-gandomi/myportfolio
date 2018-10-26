@@ -19,8 +19,8 @@
                     <!--<input type="hidden" name="defaultPic" id="defaultPic">-->
                     <div class="col-lg-5 col-sm-12 row">
                         <div id="postThumbnail" class="form-group  col-sm-12">
-                            <label class="custom_file_label" >
-                                <a href="javascript:void(0)" class="custom-file-container__image-clear btn btn-danger" id="imageClear" title="Clear Image">x</a>
+                            <label class="thumbnail-label" >
+                                <a href="javascript:void(0)" class="btn btn-danger" id="imageClear" title="Clear Image">x</a>
                                 تصویر پست
 
                             </label>
@@ -136,81 +136,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="file-manager" tabindex="-1" role="dialog" aria-labelledby="file-managerLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center">
-                    <h5 class="modal-title" id="file-managerLabel">مدیریت فایل</h5>
-    
-                </div>
-                <div class="modal-body">
-                    <div class="row toolbar">
-                        <div class="col-sm-5 dir-operations">
-                            <a href="#" id="button-parent" class="btn btn-default hint--top" aria-label="پوشه قبلی"><i
-                                    class="i-level-up"></i></a>
-                            <a href="#" id="button-refresh" class="btn btn-default hint--top" aria-label="رفرش"><i
-                                    class="i-refresh"></i></a>
-                            <label for="img-upload" class="btn btn-primary hint--top m-0" aria-label="آپلود عکس">
-                                <i class="i-upload"></i>
-                                <input class="d-none" type="file" id="img-upload" name="images[]" multiple>
-                            </label>
-                            <button type="button" id="new-folder-btn" class="btn btn-success hint--top" aria-label="پوشه جدید"><i
-                                    class="i-folder-add"></i></button>
-                            <form class="popover newFolderForm" role="tooltip">
-                                <div class="arrow"></div>
-                                <h5>پوشه جدید</h3>
-                                <div class="popover-content">
-                                    <div class="input-group"> 
-                                       
-                                        <input type="text" name="folder" value="" placeholder="نام پوشه" class="form-control"> 
-                                        <span class="input-group-btn">
-                                                <button type="button" title="New Folder" id="folder-create-btn" class="btn btn-primary"><i class="i-plus-circle"></i></button>
-                                        </span>
-                                            
-                                    </div>
-                                </div>
-                            </form>
-                            <button type="button" id="button-delete" class="btn btn-danger hint--top" aria-label="حذف فایل"><i
-                                    class="i-trash"></i></button>
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="input-group">
-                                <input type="text" name="search" value="" placeholder="Search.." class="form-control">
-                                <span class="input-group-btn">
-                                    <button type="button" data-toggle="tooltip" title="" id="button-search" class="btn btn-primary"
-                                        data-original-title="Search"><i class="i-search"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="directory-wrapper">
-                        <form id="file-management-form">
-                        <div class="sk-fading-circle">
-                            <div class="sk-circle1 sk-circle"></div>
-                            <div class="sk-circle2 sk-circle"></div>
-                            <div class="sk-circle3 sk-circle"></div>
-                            <div class="sk-circle4 sk-circle"></div>
-                            <div class="sk-circle5 sk-circle"></div>
-                            <div class="sk-circle6 sk-circle"></div>
-                            <div class="sk-circle7 sk-circle"></div>
-                            <div class="sk-circle8 sk-circle"></div>
-                            <div class="sk-circle9 sk-circle"></div>
-                            <div class="sk-circle10 sk-circle"></div>
-                            <div class="sk-circle11 sk-circle"></div>
-                            <div class="sk-circle12 sk-circle"></div>
-                        </div>
-                        </form>
-                        
-                    </div>
-
-
-
-                </div>
-               
-            </div>
-        </div>
-    </div>
+{{> admin/file-manager}}
 <!--<script src="public/js/admin/jodit.min.js"></script>-->
 
 <script src="public/js/admin/suneditor.min.js"></script>

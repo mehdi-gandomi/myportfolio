@@ -23,20 +23,24 @@
                     <input type="hidden" name="user_id" value="{{user_id}}">
                     <div class="col-6">
                         <div id="profileAvatarWrapper" class="form-group">
-                            <div class="custom-file-container" data-upload-id="profilePic">
-                                <label class="custom_file_label">
-                                    <a href="javascript:void(0)" class="custom-file-container__image-clear btn btn-danger" id="imageClear" title="Clear Image">x</a>
+                            
+                                <label class="avatar-label">
+                                    <a href="javascript:void(0)" class="clear-btn btn btn-danger" id="imageClear" title="Clear Image">x</a>
                                     تصویر پروفایل
 
                                 </label>
-                                <label class="custom-file-container__custom-file" >
-                                    <input type="file" class="custom-file-container__custom-file__custom-file-input"  accept="image/*" name="avatar">
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-                                    <span style="visibility: hidden" class="custom-file-container__custom-file__custom-file-control"></span>
-                                    <div class="custom-file-container__image-preview" style="background-image:url('{{image_path}}')  !important;"></div>
-                                </label>
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input type='file' id="imageUpload" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <label for="imageUpload"></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview" style="background-image: url('{{image_path}}');">
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </div>
+                            
                         </div>
                         <div class="form-group">
                             <label for="fname">نام </label>
@@ -108,21 +112,15 @@
 <!--****************************************end of page-wrapper-->
 
 <!--file_upload-->
-<script src="public/js/admin/file-upload-with-preview.min.js"></script>
+<!--<script src="public/js/admin/file-upload-with-preview.min.js"></script>-->
+<script src="public/js/admin/avatar-upload.js"></script>
 <script>
     //First upload
-    var firstUpload = new FileUploadWithPreview('profilePic');
     var clearBtn=document.querySelector(".custom-file-container__image-clear");
     var defaultPic=document.querySelector("#defaultPic");
     clearBtn.addEventListener("click",function () {
         defaultPic.value="yes";
     });
-//    var firstUploadInfoButton = document.querySelector('.upload-info-button--first');
-//    firstUploadInfoButton.addEventListener('click', function () {
-//        console.log('First upload:', firstUpload, firstUpload.cachedFileArray);
-//    })
-
-    //form submit
 
 </script>
 <script src="public/js/iziToast.min.js"></script>

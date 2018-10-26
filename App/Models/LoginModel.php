@@ -25,6 +25,7 @@ class LoginModel extends  \Core\Model
             $_SESSION['fname']=$result['fname'];
             $_SESSION['lname']=$result['lname'];
             $_SESSION['avatar']=$result['avatar'];
+            setcookie(session_name(),session_id(),time()+3600);
             return true;
         }else{
             throw new \Exception("پسورد وارد شده اشتباه است!","3");

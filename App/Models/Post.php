@@ -44,7 +44,6 @@ class Post extends \Core\Model
 
     public static function insert_new_post($postData)
     {
-        unset($postData['MAX_FILE_SIZE']);
         try{
             
             $post_id=self::genCode("posts","post_id");
@@ -192,6 +191,14 @@ class Post extends \Core\Model
                 }
             }
             return $tags;
+
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+    public static function getAllCategories(){
+        try {
+            return self::select("post_categories");
 
         } catch (\Exception $e) {
             return false;

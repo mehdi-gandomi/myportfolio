@@ -27,6 +27,7 @@ class Blog extends \Core\Controller {
             $is_first_page=false;
             $is_last_page=false;
             $postsCount=Post::getAllPostsCount();
+            $posts_categories=Post::getAllCategories();
             if (isset($this->route_params['page'])){
                 $posts=Post::getAll(intval($this->route_params['page']),$limit);
                 $pages_count=$postsCount/$limit;
@@ -42,6 +43,7 @@ class Blog extends \Core\Controller {
                     'base_url'=>Config::BASE_URL,
                     'title'=>"پست های اخیر",
                     "posts"=>$posts,
+                    'categories'=>$posts_categories,
                     'firstPage'=>$is_first_page,
                     'lastPage'=>$is_last_page,
                     'pages'=>$pages,
@@ -65,6 +67,7 @@ class Blog extends \Core\Controller {
                         'base_url'=>Config::BASE_URL,
                         'title'=>"پست های اخیر",
                         "posts"=>$posts,
+                        'categories'=>$posts_categories,
                         'firstPage'=>true,
                         'lastPage'=>false,
                         'pages'=>$pages,
@@ -76,6 +79,7 @@ class Blog extends \Core\Controller {
                         'base_url'=>Config::BASE_URL,
                         'title'=>"پست های اخیر",
                         "posts"=>$posts,
+                        'categories'=>$posts_categories,
                         'firstPage'=>$is_first_page,
                         'lastPage'=>true,
                         'pages'=>$pages,

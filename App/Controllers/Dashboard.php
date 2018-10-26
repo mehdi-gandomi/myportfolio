@@ -20,11 +20,13 @@ class Dashboard extends \Core\Controller {
 
     protected function before()
     {
-//        session_start();
-//
-//        if (!isset($_SESSION['id']) || $_SESSION['id']==false){
-//            self::redirect_to(Config::BASE_URL."/dashboard/login");
-//        }
+       session_start();
+
+       if (!isset($_SESSION['id']) || $_SESSION['id']==false){
+           setcookie(session_name(),session_id(),time()+3600);
+           self::redirect_to(Config::BASE_URL."/dashboard/login");
+
+       }
     }
 
     public function AllComments(){
@@ -711,7 +713,7 @@ class Dashboard extends \Core\Controller {
         View::renderMustache("dashboard/post-edit",array(
             'base_url'=>Config::BASE_URL,
            'post_id'=>$post['post_id'],
-           'post_thumbnail'=>$post['post_thumbnail'] ? "public/images/posts/".$post['post_thumbnail']:"http://localhost/picfaker/?width=150&height=150",
+           'post_thumbnail'=>$post['post_thumbnail'] ? $post['post_thumbnail']:"public/images/placeholder.png",
             'post_title'=>$post['post_title'],
             'post_slug'=>$post['post_slug'],
             'preview_text'=>$post['preview_text'],

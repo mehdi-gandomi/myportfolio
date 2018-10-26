@@ -1,3 +1,16 @@
+// edit profile page
+#profileAvatarWrapper{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.avatar-label{
+  text-align: center;
+  font-size: 1.3rem;
+  .clear-btn{
+    border-radius: 50%;
+  }
+}
 // top nav styles
 .nav-toggler .i-bars{
   font-size: 1.5rem;
@@ -186,6 +199,12 @@ span{
 #postThumbnail{
   display: flex;
   flex-direction: column;
+}
+.thumbnail-label{
+  text-align: center;
+  a{
+    border-radius: 50%;
+  }
 }
 .thumbnail-preview{
   width: 80%;

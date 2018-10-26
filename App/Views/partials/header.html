@@ -12,6 +12,19 @@
 
     <link rel="stylesheet" href="public/css/main.min.css">
 
+    <script>
+        var head=document.querySelector("head");
+        if(CSS.supports("display: grid")){
+            console.log("fuck");
+            let link  = document.createElement('link');
+            link.rel  = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'public/css/main.min.css';
+            link.setAttribute("data-css-polyfilled","true");
+            head.appendChild(link);
+        }
+    </script>
+
 </head>
 
 <body class="animated fadeIn">

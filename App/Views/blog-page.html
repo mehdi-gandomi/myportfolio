@@ -6,9 +6,10 @@
    <div class="filter-section">
        <form action="" class="filter-form">
            <select name="categories" id="" class="form-control ml-1">
-               <option value="web-development">طراحی وب</option>
-               <option value="tips-tricks">ترفند های کامپیوتر</option>
-               <option value="programming">برنامه نویسی</option>
+                {{#categories}}
+                    <option value="{{cat_slug}}">{{cat_title}}</option>          
+                {{/categories}}
+        
            </select>
            <select name="filter" id="" class="form-control ml-1">
                <option value="newest">جدیدترین مقالات</option>
@@ -26,7 +27,7 @@
        {{#posts}}
             <article class="card">
            <header class="card__thumb">
-               <a href="#"><img src="https://images.unsplash.com/photo-1512466699224-9d8217244131?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4b6f389eb54cb8e27ee8ee5d4040a5d7&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb" ></a>
+               <a href="#"><img src="{{post_thumbnail}}" ></a>
 
            </header>
            <div class="card__date">
