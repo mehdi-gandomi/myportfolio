@@ -1,0 +1,174 @@
+*{
+  box-sizing: border-box;
+}
+body {
+  @include background;
+  background: $primary-color;
+  color: set_text_color($primary-color);
+  direction: rtl;
+  height: 100%;
+  font-family: IRANSans,Tahoma;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+h1,h2,h3{
+  margin: 0;
+  font-weight: 400;
+  &.lg-heading{
+    font-size: 5rem;
+    padding: 1rem;
+  }
+  &.sm-heading{
+    margin-bottom: 2rem;
+    padding:0.2rem 2rem;
+
+  }
+}
+a{
+  color: #fff;
+  text-decoration: none;
+}
+header.main-header{
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+}
+.text-secondary{
+  color: $secondary-color;
+}
+main{
+  padding: 4rem;
+  //height: 100%;
+  min-height: calc(100vh - 60px);
+  .icons{
+    margin-top: 1rem;
+    margin-right: .5rem;
+    display: flex;
+    a{
+      color: set_text_color($primary-color);
+    }
+    a{
+      background: #D2D7D3;
+      color: #222;
+      border-radius: 100%;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      margin: 0 4px;
+      //padding-top: 12px;
+      -webkit-transition: all .5s;
+      -moz-transition: all .5s;
+      transition: all .5s;
+    }
+    a span{
+      background: #fff;
+      color: #222;
+      font-size: 14px;
+      font-weight: bold;
+      position: absolute;
+      bottom: 0;
+      left: -25px;
+      right: -25px;
+      padding: 5px 7px;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transition: all .4s;
+      transition: all .4s;
+    }
+    a span:before{
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #fff;
+      position: absolute;
+      bottom: -5px;
+      left: 40px;
+    }
+    a:hover span{
+      bottom: 50px;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* hover over the icons now to see the tooltips! */
+    a.demo-icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+    a.icon-twitter:hover{
+      background-color: #19b5fe;
+      color: #fff;
+    }
+    a.icon-twitter span{
+      color: #19b5fe;
+    }
+    a.icon-instagram:hover{
+      background-color: #ff5716;
+      color: #fff;
+    }
+    a.icon-instagram span{
+      color: #ff5716;
+    }
+    a.icon-telegram:hover{
+      background-color: #3b6eff;
+      color: #fff;
+    }
+    a.icon-telegram span{
+      color: #3b6eff;
+    }
+    a.icon-linkedin:hover{
+      background-color: #2b33ff;
+      color: #fff;
+    }
+    a.icon-linkedin span{
+      color: #2b33ff;
+    }
+    a.icon-user:hover{
+      background-color: #00b4b0;
+      color: #fff;
+    }
+    a.icon-user span{
+      color: #00b4b0;
+    }
+
+    a.icon-github:hover{
+      background-color: #000;
+      color: #fff;
+    }
+    a.icon-github span{
+      color: #000;
+    }
+
+    a.icon-pinterest:hover{
+      background-color: #f22613;
+      color: #fff;
+    }
+    a.icon-pinterest span{
+      color: #f22613;
+    }
+
+  }
+  &#home-page{
+    overflow: hidden;
+    h1{
+      margin-top: 20vh;
+    }
+    
+  }
+}
+.text-black{
+  color: #000000 !important;
+}
+.text-center{
+  text-align: center !important;
+}
+.iziToast-message{
+  text-align: center !important;
+}

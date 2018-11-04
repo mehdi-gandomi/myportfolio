@@ -1,0 +1,333 @@
+//widescreens
+@include media-xl{
+  .projects{
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  .wrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr !important;
+
+  }
+}
+
+//desktop
+@include media-lg{
+
+  main{
+    &#blog-page{
+      padding-top: 5rem;
+    }
+    &#contact-page{
+      padding:0 !important;
+    }
+
+  }
+  .projects{
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .skills-wrapper ul li{
+    flex-direction: column;
+    margin: 1.5rem 0 !important;
+    span,.box{
+      width: 100% !important;
+    }
+    span{
+      margin-bottom: 0.5rem;
+    }
+  }
+  .wrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr !important;
+    *{
+      padding: 1em;
+    }
+  }
+  #work-page .project-items {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .project-skills{
+    grid-column: 1/ span 3 !important;
+    grid-row: 2/ span 1 !important;
+  }
+  .project-gallery{
+    grid-column: 1/span 3 !important;
+    grid-row: 3/ span 1 !important;
+  }
+  .blog-cards{
+    grid-template-columns: repeat(3,1fr) !important;
+  }
+
+}
+
+//tablet
+@include media-md{
+  .menu-btn{
+    .bar-line{
+          background-color: lighten($primary-color,35);
+    }
+  }
+  main{
+    &#blog-page{
+      padding-top: 5rem;
+    }
+    &#contact-page{
+      padding:0 !important;
+    }
+
+    align-items: center !important;
+    text-align: center !important;
+
+    .lg-heading{
+      line-height: 1 !important;
+      margin-bottom: 1rem !important;
+    }
+  }
+  ul.navbar,div.menu-brand{
+    float: none !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    &.show{
+      transform: translate3d(0,0,0) !important;
+    }
+  }
+  .navbar{
+    height: 75vh !important;
+    transform: translate3d(- 100%,0,0) !important;
+    font-size: 24px !important;
+  }
+  .menu-brand{
+    height: 25vh !important;
+    transform: translate3d(100%,0,0) !important;
+    .avatar{
+      background: url("http://localhost/picfaker/?width=150&height=150") !important;
+      width: 150px !important;
+      height: 150px !important;
+    }
+  }
+  .about-info{
+    grid-template-areas:
+    'bioimage'
+    'bio'
+    'job1'
+    'job2'
+    'job3';
+    grid-template-columns: 1fr;
+  }
+  .projects{
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .contact-form form{
+    grid-template-columns: 1fr !important;
+  }
+  .contact-info li i{
+    display: block !important;
+  }
+
+  .skills-wrapper{
+    grid-template-columns:1fr !important;
+    h1{
+      grid-column: 1/1 !important;
+    }
+    span{
+      font-size: 0.8em !important;
+    }
+  }
+  #work-page .project-items {
+    grid-template-columns: 1fr 1fr;
+  }
+  .project-overview{
+    grid-template-areas: 'thumb' 'description' 'skills' 'gallery'  !important;
+    grid-template-columns: 1fr !important;
+    .project-skills{
+      grid-template-columns: 1.1fr 2fr !important;
+      grid-column: 1 !important;
+    }
+    .project-gallery{
+      grid-column: 1 !important;
+
+    }
+
+  }
+  .project-comment{
+    grid-template-columns: 1fr !important;
+  }
+  .new-comment input,textarea{
+    width: 100% !important;
+  }
+  #home-page .icons{
+    justify-content: center;
+  }
+  .lg-heading{
+    font-size: 3.5rem !important;
+  }
+  .sm-heading{
+    font-size: 1.3rem !important;
+  }
+  .blog-cards{
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+main#post-wrap{
+  grid-template-columns: 1fr !important;
+  padding: 4rem 1rem !important;
+}
+}
+
+//smartphones
+@include media-sm{
+
+  .about-info{
+    text-align: center;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+     'bioimage'
+     'bio'
+    'job'
+    !important;
+  }
+  ul.navbar,div.menu-brand{
+    float: none !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    &.show{
+      transform: translate3d(0,0,0) !important;
+    }
+  }
+  .navbar{
+    height: 75vh !important;
+    transform: translate3d(- 100%,0,0) !important;
+    font-size: 24px !important;
+  }
+  .menu-brand{
+    height: 25vh !important;
+    transform: translate3d(100%,0,0) !important;
+    .avatar{
+      background: url("http://localhost/picfaker/?width=150&height=150") !important;
+      width: 150px !important;
+      height: 150px !important;
+    }
+  }
+
+  .menu-btn{
+    .bar-line{
+          background-color: lighten($primary-color,35);
+    }
+  }
+  main{
+    align-items: center !important;
+    text-align: center !important;
+    .icons{
+      justify-content: center !important;
+    }
+    &#blog-page{
+      padding-top: 5rem;
+    }
+    &#home h1{
+      margin-top: 10vh;
+    }
+    &#contact-page{
+      padding:0 !important;
+    }
+  }
+  .projects{
+    grid-template-columns: 1fr !important;
+  }
+  .contact-form form{
+    grid-template-columns: 1fr !important;
+  }
+  .contact-info li i{
+    display: block !important;
+  }
+
+  .skills-wrapper{
+    grid-template-columns:1fr !important;
+    h1{
+      grid-column: 1/1 !important;
+    }
+    ul li{
+      flex-direction: column;
+      margin: 1.5rem 0 !important;
+      span,.box{
+        width: 100% !important;
+      }
+      span{
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  #work-page .project-items {
+    grid-template-columns: 1fr ;
+  }
+  .project-overview{
+    grid-template-areas: 'thumb' 'description' 'skills' 'gallery'  !important;
+    grid-template-columns: 1fr !important;
+    .project-skills{
+      grid-template-columns: 1.1fr 2fr !important;
+    }
+  }
+  .lg-heading{
+    font-size: 2.5rem !important;
+  }
+  .sm-heading{
+    font-size: 1rem !important;
+  }
+  .blog-cards{
+    grid-template-columns: 1fr !important;
+  }
+  main#blog-page{
+    padding: 5rem 2rem !important;
+  }
+  .filter-section {
+    grid-template-columns: 1fr !important;
+    grid-row-gap: 1.3rem;
+
+    .filter-form {
+      select{
+        flex-basis: 30% !important;
+      }
+      input[type="submit"]{
+        flex-basis: 40% !important;
+      }
+    }
+    .search-form {
+      input[type="text"]{
+        flex-basis: 75%;
+      }
+      input[type="submit"]{
+        flex-basis: 25% !important;
+      }
+    }
+  }
+main#post-wrap{
+  grid-template-columns: 1fr !important;
+  padding: 4rem 1rem !important;
+}
+}
+
+//custome media queries
+@media screen and (min-width: 577px) and(max-width: 920px){
+  .filter-section{
+    grid-template-columns: 1fr !important;
+    grid-row-gap: 1.3rem;
+  }
+  .filter-section .filter-form select{
+    flex-basis: 33.9% !important;
+  }
+  .filter-section .filter-form input[type="submit"]{
+    flex-basis: 25% !important;
+  }
+}
+@media screen and (max-width: 465px){
+  //.filter-section{
+  //  grid-template-columns: 1fr !important;
+  //  grid-row-gap: 1.3rem;
+  //}
+  .filter-section .filter-form ,.search-form{
+    flex-direction: column;
+    select,input[type="submit"],input[type="text"]{
+      flex-basis: 100% !important;
+      margin-top: 1rem;
+    }
+  }
+
+}

@@ -90,6 +90,29 @@ class Blog extends \Core\Controller {
             }
 
     }
+
+    public function singlePostAction(){
+        if(isset($this->route_params['slug'])){
+            $post=Post::get_post_data_by_slug($this->route_params['slug']);
+            
+            if($post){
+                $userData=Post::get_user_data_by_id($post['user_id']);
+                
+                View::renderMustache("post",array(
+                    'base_url'=>Config::BASE_URL,
+                    'post_title'=>$post['post_title'],
+                    "post_thumbnail"=>$post['post_thumbnail'],
+                    'tags'=>strlen($post['tags'])>0 ? explode(",",$post['tags']):false,
+                    'post_content'=>$post['post_content'],
+                    'fullname'=>$userData['fname']." ".$userData['lname'],
+                    'has_tags'=>strlen($post['tags'])>0
+                ));       
+            }else{
+                echo "پستی با این مشخصات یافت نشد";
+            }
+            
+        }
+    }
       private function create_pagination($pages_count,$base_url="dashboard/comment/",$digitsName="title")
     {
         $output=[];

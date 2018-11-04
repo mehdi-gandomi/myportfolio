@@ -21,6 +21,7 @@ $router->add('my-portfolio', ['controller' => 'Portfolio', 'action' => 'index'])
 $router->add('contact-me', ['controller' => 'Contact', 'action' => 'index']);
 $router->add('blog-page', ['controller' => 'Blog', 'action' => 'index']);
 $router->add('blog-page/{page:\d+}', ['controller' => 'Blog', 'action' => 'index']);
+$router->add('post/{slug:(.*)}', ['controller' => 'Blog', 'action' => 'singlePost']);
 $router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
 $router->add('dashboard/edit-profile-post', ['controller' => 'Dashboard', 'action' => 'editProfile']);
 $router->add('dashboard/about-me', ['controller' => 'Dashboard', 'action' => 'about_me']);

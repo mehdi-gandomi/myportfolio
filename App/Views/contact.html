@@ -14,21 +14,27 @@
         <div class="contact-info">
             <h2>راه های ارتباطی با من</h2>
             <ul>
-                <li>
-                    <i class="icon-mail-alt text-secondary icon-2x"></i>
-                    <a href="mailto:{{email}}">
-                        <!--<span class="text-secondary">ایمیل : </span>-->
-                        {{email}}
-                    </a>
-                </li>
-                <li>
-                    <i class="icon-mobile text-secondary icon-2x"></i>
-                    {{phone}}
-                </li>
-                <li>
-                    <i class="icon-road text-secondary icon-2x"></i>
-                    {{address}}
-                </li>
+                {{#email}}
+                    <li>
+                        <i class="icon-envelope text-secondary icon-2x"></i>
+                        <a href="mailto:{{email}}">
+                            <!--<span class="text-secondary">ایمیل : </span>-->
+                            {{email}}
+                        </a>
+                    </li>
+                {{/email}}
+                {{#phone}}
+                    <li>
+                        <i class="icon-mobile text-secondary icon-2x"></i>
+                        {{phone}}
+                    </li>
+                {{/phone}}
+                {{#address}}
+                    <li>
+                        <i class="icon-road text-secondary icon-2x"></i>
+                        {{address}}
+                    </li>
+                {{/address}}
             </ul>
         </div>
         <div class="contact-form">

@@ -1,0 +1,39 @@
+
+
+$show-home-image:true;
+$home-image:url(../images/background.jpg);
+$background-opacity:0.9;
+
+
+//colors
+$primary-color: #fff;
+$text-color: #000;
+$secondary-color:#033fff;
+
+
+//blog variables
+
+$bg:	#d8e0e5;
+$color:	#08c;
+$blanc:	#fff;
+$noir: #000;
+$text: #666c74;
+$footer: #a3a9ab;
+$duration: 0.3s;
+
+$heightimg: 195px;
+
+$heighthoverimg: 145px;
+$heightbody: 120px;
+
+$widthimg: 100%;
+
+
+//media query breakpoints
+$breakpoints:(
+  xs:0px,
+  sm:576px,
+  md:768px,
+  lg:992px,
+  xl:1200px
+);

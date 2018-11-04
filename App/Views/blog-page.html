@@ -35,7 +35,16 @@
                <span class="card__date__month">شهریور</span>
            </div>
            <div class="card__body ">
-               <div class="card__category"><a href="#">{{tags}}</a></div>
+               <div class="card__category"><a href="#">
+                 
+                   {{#categories_preview}}
+                        {{categories_preview}}
+                   {{/categories_preview}}
+                   {{^categories_preview}}
+                        بدون دسته بندی
+                    {{/categories_preview}}
+                   
+               </a></div>
                <div class="card__title"><a href="post/{{post_slug}}">{{post_title}}</a></div>
                <!--<div class="card__subtitle">زیرنویس نمونه برای پست</div>-->
                <p class="card__description">{{preview_text}}</p>

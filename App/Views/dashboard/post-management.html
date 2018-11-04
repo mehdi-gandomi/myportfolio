@@ -41,14 +41,25 @@
                             <label class="control-label" for="category">دسته بندی</label>
                             <select class="selectpicker form-control"  name="post_categories[]" id="category" multiple>
                                 {{#post_categories}}
-                                <option value="{{cat_id}}">{{cat_title}}</option>
+                                    <option value="{{cat_id}}">{{cat_title}}</option>
                                 {{/post_categories}}
                             </select>
                         </div>
-
+                        <div class="form-group col-12 row">
+                            <div class="col-4">
+                                <label for="tags">برچسب ها</label>
+                                <input class="form-control" type="text"  id="tag">
+                            </div>
+                            <div class="col-8">
+                                    <ul class="tags">
+                                            <p>هیچ برچسبی انتخاب نشده است</p>
+                                    </ul>
+                            </div>
+                            
+                        </div>
                         <div class="form-group col-12">
                             <label for="preview_text">متن پیش نمایش</label>
-                            <textarea class="form-control" rows="9"  name="preview_text" id="preview_text"></textarea>
+                            <textarea class="form-control" rows="4"  name="preview_text" id="preview_text"></textarea>
                         </div>
                     </div>
                     <div class="form-group col-12">

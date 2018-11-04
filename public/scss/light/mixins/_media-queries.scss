@@ -1,0 +1,25 @@
+//Media Query mixins
+@mixin media-sm{
+    @media screen and (max-width:em(map-get($breakpoints,"sm"))){
+      @content;
+    }
+  }
+  
+  @mixin media-md{
+    @media screen and (min-width: em(map-get($breakpoints,"sm")+1)) and (max-width: em(map-get($breakpoints,"md"))){
+      @content;
+    }
+  }
+  
+  @mixin media-lg{
+    @media screen and (min-width:em(map-get($breakpoints,"md")+1)) and (max-width: em(map-get($breakpoints,"lg"))){
+      @content;
+    }
+  }
+  
+  @mixin media-xl{
+    @media screen and (min-width: em(map-get($breakpoints,"xl"))){
+      @content;
+    }
+  }
+  

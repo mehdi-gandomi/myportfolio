@@ -1,0 +1,33 @@
+
+
+
+@import "variables-dark";
+@import "mixins/mixins";
+@import "mixins/media-queries";
+@import "responsive";
+
+@import "components/animations";
+@import "components/aos";
+@import "components/buttons";
+@import "components/blog-card";
+@import "components/fontiran";
+@import "components/icomoon";
+// @import "components/iziModal";
+@import "components/izitoast";
+@import "components/lightbox";
+@import "components/menu";
+@import "components/normalize";
+@import "components/pagination";
+@import "components/portfolio-filter";
+@import "components/skill_bars";
+@import "components/setting-button";
+
+// pages
+@import "pages/home.scss";
+@import "pages/about.scss";
+@import "pages/work.scss";
+@import "pages/project-page.scss";
+@import "pages/contact.scss";
+@import "pages/recent-posts.scss";
+@import "pages/post.scss";
+@import "global-styles";

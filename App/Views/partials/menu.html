@@ -42,4 +42,39 @@
 
         </ul>
     </nav>
+    <div class="setting-button">
+        <div class="slider one"></div>
+        <div class="slider two"></div>
+        <div class="slider three"></div>
+    </div>
+    <div class="change-theme-wrap animated fadeInDown">
+        <button class="light-theme disabled" data-theme="main.light.min.css"></button>
+        <button class="dark-theme disabled" data-theme="main.dark.min.css"></button>
+    </div>
 </header>
+<script>
+//            theme stuff
+    let themeStyle=Cookies.get('theme');
+    if(themeStyle){
+        let styleSheet=document.querySelector("#main-style");
+        let link=styleSheet.getAttribute("href");
+        let baseStylePath=link.substr(0,link.lastIndexOf("/"));
+        styleSheet.setAttribute("href",baseStylePath+"/"+themeStyle);
+        document.querySelectorAll("[data-theme]").forEach(function(el){el.classList.remove("disabled");el.removeAttribute("disabled");});
+        document.querySelector("[data-theme='"+themeStyle+"']").classList.add("disabled");
+        document.querySelector("[data-theme='"+themeStyle+"']").setAttribute("disabled","disabled");
+    }else{
+        document.querySelectorAll("[data-theme]").forEach(function(el){el.classList.remove("disabled")});
+        document.querySelector("[data-theme='main.light.min.css']").classList.add("disabled");
+    }
+    //check grid support
+    var head=document.querySelector("head");
+    var mainStyleSheet=document.getElementById("main-stylesheet");
+    if(!CSS.supports("display: grid")){
+        console.log("css grid is not supported");
+        let script=createElement("script","[src:public/js/css-polyfills.min.js]");
+        head.appendChild(script);
+    }
+</script>
+        
+        

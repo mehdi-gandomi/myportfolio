@@ -1,0 +1,47 @@
+// button#change-theme-button{
+//     display: inline-block;
+//     font-weight: 400;
+//     text-align: center;
+//     white-space: nowrap;
+//     vertical-align: middle;
+//     -webkit-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+//     border: 1px solid transparent;
+//     padding: .375rem .75rem;
+//     font-size: 1rem;
+//     line-height: 1.5;
+//     border-radius: .25rem;
+//     -webkit-transition-duration: 0.4s; /* Safari */
+//     transition-duration: 0.4s;
+//     background-color: #fff !important;
+//     color: #000 !important;
+
+// }
+
+h1,h2,h3{
+    margin: 0;
+    font-weight: 400;
+    &.lg-heading{
+      font-size: 5rem;
+      padding: 1rem;
+    }
+    &.sm-heading{
+      margin-bottom: 2rem;
+      padding:0.2rem 2rem;
+  
+    }
+  }
+  a{
+    color: $link-color;
+    text-decoration: none;
+  }
+.float-right{
+    float: right !important;
+}
+//   .iziToast-opened{
+//       background-color: $izitoast-bgcolor !important;
+//       background: $izitoast-bgcolor !important;
+//       color: set_text_color($izitoast-bgcolor) !important;
+//   }

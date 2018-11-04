@@ -1,0 +1,64 @@
+
+
+$show-home-image:true;
+$home-image:url(../images/background.jpg);
+$background-opacity:0.9;
+
+
+//colors
+$primary-color: #444;
+$text-color: #fff;
+$secondary-color:#eece1a;
+
+
+//blog variables
+
+$bg:	#d8e0e5;
+$color:	#08c;
+$blanc:	#fff;
+$noir: #000;
+$text: #666c74;
+$footer: #a3a9ab;
+$duration: 0.3s;
+
+$heightimg: 195px;
+
+$heighthoverimg: 145px;
+$heightbody: 120px;
+
+$widthimg: 100%;
+
+
+//media query breakpoints
+$breakpoints:(
+  xs:0px,
+  sm:576px,
+  md:768px,
+  lg:992px,
+  xl:1200px
+);
+
+// button colors
+
+$primary-button-background:#265AA2;
+$primary-button-foreground:#fff;
+
+$danger-button-background:#D1495B;
+$danger-button-foreground:#fff;
+
+$warning-button-background:#EDAE49;
+$warning-button-foreground:#000;
+
+$dark-button-background:#003D5B;
+$dark-button-foreground:#fff;
+
+$change-theme-button-bgcolor:#eee;
+$setting-button-bgcolor:#fff;
+
+$link-color:#fff;
+
+$skills-bgcolor:lighten($primary-color,5);
+        
+$job-bgcolor:lighten($primary-color,5);
+
+$izitoast-bgcolor:#565c70;

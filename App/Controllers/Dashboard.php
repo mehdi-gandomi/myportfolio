@@ -666,8 +666,9 @@ class Dashboard extends \Core\Controller {
             unset($postData['post_categories']);
 
             $post_id=Post::insert_new_post($postData);
+            
             $result=Post::insert_post_categories($post_id,$post_categories);
-            $result=Post::generate_and_add_tags_to_post($post_id,$post_categories);
+            $result=Post::generate_and_add_categories_preview_to_post($post_id,$post_categories);
             if ($result){
                 echo json_encode(
                     array(
@@ -719,7 +720,8 @@ class Dashboard extends \Core\Controller {
             'preview_text'=>$post['preview_text'],
             'post_content'=>$post['post_content'],
             'selected_categories'=>$selected_categories,
-            'non_selected_categories'=>$non_selected_categories
+            'non_selected_categories'=>$non_selected_categories,
+            'tags'=>explode(",",$post['tags'])
         ));
     }
     public function postsJsonAction(){

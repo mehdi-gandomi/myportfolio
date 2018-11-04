@@ -9,28 +9,13 @@
     <title>{{title}}</title>
 
     <!-- css imports -->
-
-     <link rel="stylesheet" id="main-stylesheet" href="public/css/main.min.css">
-
-    <script>
-        var head=document.querySelector("head");
-        var mainStyleSheet=document.getElementById("main-stylesheet");
-        if(!CSS.supports("display: grid")){
-//            head.removeChild(mainStyleSheet);
-  //          console.log("css grid is not supported");
-            let script=document.createElement("script");
-            script.href="public/js/css-polyfills.min.js";
-    //        let link  = document.createElement('link');
-      //      link.rel  = 'stylesheet';
-        //    link.type = 'text/css';
-          //  link.href = 'public/css/main.min.css';
-            //link.setAttribute("data-css-polyfilled","true");
-            //head.appendChild(link);
-            head.appendChild(script);
-        }
-    </script>
+     <link rel="stylesheet" id="main-style" href="public/css/main.light.min.css" >
 
 
+     <!-- js stuff -->
+     <script src="public/js/dom-creator.js"></script>
+    <script src="public/js/js.cookie.min.js"></script>
+    
 </head>
 
 <body id="bg-img" class="animated fadeIn">

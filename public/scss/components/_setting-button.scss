@@ -1,0 +1,144 @@
+.setting-button {
+    font-size: 0;
+    width: 42px;
+    height: 42px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    // border-radius: 100%;
+    padding: 14px 10px;
+    position: relative;
+    background: $setting-button-bgcolor;
+    cursor: pointer;
+  }
+  .setting-button.close .one {
+    -webkit-transform: translate3d(4px, 1px, 0) rotate(45deg);
+    -moz-transform: translate3d(4px, 1px, 0) rotate(45deg);
+    -o-transform: translate3d(4px, 1px, 0) rotate(45deg);
+    -ms-transform: translate3d(4px, 1px, 0) rotate(45deg);
+    transform: translate3d(4px, 1px, 0) rotate(45deg);
+    width: 18px;
+  }
+  .setting-button.close .three {
+    -webkit-transform: translate3d(5px, -1px, 0) rotate(-45deg);
+    -moz-transform: translate3d(5px, -1px, 0) rotate(-45deg);
+    -o-transform: translate3d(5px, -1px, 0) rotate(-45deg);
+    -ms-transform: translate3d(5px, -1px, 0) rotate(-45deg);
+    transform: translate3d(5px, -1px, 0) rotate(-45deg);
+    width: 18px;
+  }
+  .setting-button.close .two {
+    width: 0;
+  }
+  .setting-button.close .slider:before {
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    width: 22px;
+    border-radius: 4px;
+    height: 2px;
+    background: set_text_color($setting-button-bgcolor);
+    position: absolute;
+    -webkit-transform-origin: 2px 2px;
+    -moz-transform-origin: 2px 2px;
+    -o-transform-origin: 2px 2px;
+    -ms-transform-origin: 2px 2px;
+    transform-origin: 2px 2px;
+    -webkit-transition: all 500ms cubic-bezier(0, 1, 0, 1);
+    -moz-transition: all 500ms cubic-bezier(0, 1, 0, 1);
+    -o-transition: all 500ms cubic-bezier(0, 1, 0, 1);
+    -ms-transition: all 500ms cubic-bezier(0, 1, 0, 1);
+    transition: all 500ms cubic-bezier(0, 1, 0, 1);
+  }
+  .slider:before {
+    width: 6px;
+    height: 6px;
+    margin-top: -2px;
+    margin-left: -3px;
+    border-radius: 999px;
+    background: set_text_color($setting-button-bgcolor);
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 70%;
+    -webkit-transition: left 140ms cubic-bezier(0, 2, 1, 1);
+    -moz-transition: left 140ms cubic-bezier(0, 2, 1, 1);
+    -o-transition: left 140ms cubic-bezier(0, 2, 1, 1);
+    -ms-transition: left 140ms cubic-bezier(0, 2, 1, 1);
+    transition: left 140ms cubic-bezier(0, 2, 1, 1);
+  }
+  .setting-button:hover .slider:before {
+    left: 30%;
+  }
+  .slider.two {
+    margin-top: 6px;
+  }
+  .slider.two:before {
+    left: 30%;
+    -webkit-transition-delay: 55ms;
+    -moz-transition-delay: 55ms;
+    -o-transition-delay: 55ms;
+    -ms-transition-delay: 55ms;
+    transition-delay: 55ms;
+  }
+  .setting-button:hover .slider.two:before {
+    left: 70%;
+  }
+  .slider.three {
+    margin-top: 12px;
+  }
+  .slider.three:before {
+    left: 70%;
+    -webkit-transition-delay: 110ms;
+    -moz-transition-delay: 110ms;
+    -o-transition-delay: 110ms;
+    -ms-transition-delay: 110ms;
+    transition-delay: 110ms;
+  }
+  .setting-button:hover .slider.three:before {
+    left: 30%;
+  }
+  .setting-button {
+    zoom: 100%;
+    margin: 1rem;
+    float: left;
+  }
+  .setting-button.close{
+    padding: 14px 14px !important;
+  }
+
+  .change-theme-wrap{
+      @include size(42,100);
+      background: $change-theme-button-bgcolor;
+      float: left;
+      position: absolute;
+      left: 16px;
+      top: 60px;
+      display: none;
+      &.show{
+          display: block;
+      }
+      .light-theme{
+          &.disabled{
+              cursor: not-allowed !important;
+              
+          }
+          cursor: pointer;
+          background: #fff;
+          @include size(30);
+          margin: 0.7rem auto;
+          display: block;
+      }
+    .dark-theme{
+        &.disabled{
+            cursor: not-allowed !important;
+            
+        }
+        cursor: pointer;
+        background: #000;
+        @include size(30);
+        margin: 0.7rem auto;
+        display: block;
+     }
+  }

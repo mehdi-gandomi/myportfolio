@@ -6,10 +6,10 @@ class Post extends \Core\Model
     public static function getAll($page=1,$limit=1){
         $db=static::getDB();
         if ($page==="all"){
-            $sql="SELECT posts.post_id,posts.post_title,posts.post_slug,posts.post_thumbnail,posts.preview_text,posts.post_content,posts.created_at,posts.updated_at,posts.tags AS category_slugs FROM posts INNER JOIN cat_post ON posts.post_id=cat_post.post_id INNER JOIN post_categories ON cat_post.cat_id=post_categories.cat_id GROUP BY posts.post_id";
+            $sql="SELECT posts.post_id,posts.post_title,posts.post_slug,posts.post_thumbnail,posts.preview_text,posts.post_content,posts.created_at,posts.updated_at,posts.categories_preview AS category_slugs FROM posts INNER JOIN cat_post ON posts.post_id=cat_post.post_id INNER JOIN post_categories ON cat_post.cat_id=post_categories.cat_id GROUP BY posts.post_id";
         }else{
             $page_limit=($page-1)*$limit;
-            $sql="SELECT posts.post_id,posts.post_title,posts.post_slug,posts.post_thumbnail,posts.preview_text,posts.post_content,posts.created_at,posts.updated_at,posts.tags FROM posts INNER JOIN cat_post ON posts.post_id=cat_post.post_id INNER JOIN post_categories ON cat_post.cat_id=post_categories.cat_id GROUP BY posts.post_id LIMIT $page_limit,$limit";
+            $sql="SELECT posts.post_id,posts.post_title,posts.post_slug,posts.post_thumbnail,posts.preview_text,posts.post_content,posts.created_at,posts.updated_at,posts.categories_preview FROM posts INNER JOIN cat_post ON posts.post_id=cat_post.post_id INNER JOIN post_categories ON cat_post.cat_id=post_categories.cat_id GROUP BY posts.post_id LIMIT $page_limit,$limit";
 
         }
         try{
@@ -41,7 +41,13 @@ class Post extends \Core\Model
             return false;
         }
     }
-
+    public static function get_post_data_by_slug($slug){
+        try{
+            return static::select("posts","*","post_slug='$slug'",true);
+        }catch(\Exception $e){
+            return false;
+        }
+    }
     public static function insert_new_post($postData)
     {
         try{
@@ -51,6 +57,7 @@ class Post extends \Core\Model
             self::insert("posts",$postData,false);
             return $post_id;
         }catch (\Exception $e){
+            
             return false;
         }
     }
@@ -66,25 +73,28 @@ class Post extends \Core\Model
             }
             return true;
         }catch (\Exception $e){
+     
+            return false;
+            
+        }
+    }
+    public static function get_user_data_by_id($id){
+        try{
+            return static::select("personal_info","fname,lname","id='$id'",true);
+        }catch(\Exception $e){
             return false;
         }
     }
-
-    public static function generate_and_add_tags_to_post($post_id, $post_categories)
+    public static function generate_and_add_categories_preview_to_post($post_id, $post_categories)
     {
         try{
-            $postTags="";
+            $postTags=[];
             foreach ($post_categories as $post_category){
                 $category_title=self::select("post_categories","cat_title","cat_id='$post_category'",true);
-                if (strlen($postTags)>1){
-                    $tag=",".$category_title['cat_title'];
-                    $postTags.=$tag;
-                }else{
-                    $postTags=$category_title['cat_title'];
-                }
+                array_push($postTags,$category_title['cat_title']);
             }
             self::update("posts",array(
-               'tags'=>$postTags
+               'categories_preview'=>implode(",",$postTags)
             ),"post_id='$post_id'");
             return true;
         }catch (\Exception $e){
@@ -155,8 +165,8 @@ class Post extends \Core\Model
             $postCategories=$postData['post_categories'];
             unset($postData['post_categories']);
             try{
-                $postData['tags']=static::create_tags_for_post($postCategories);
-                self::update("posts",$postData,"post_id='$post_id'");
+                static::generate_and_add_categories_preview_to_post($post_id,$postCategories);
+                self::update("posts",$postData,"post_id='$post_id'",false);
                 static::delete_all_post_categories_by_id($post_id);
                 static::insert_post_categories($post_id,$postCategories);
                 return true;

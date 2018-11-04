@@ -9,7 +9,8 @@
     "test": "mocha --require babel-register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-register --colors -w ./test/*.spec.js",
     "admin-sass:watch":"sass --watch public/scss/admin/main.scss:public/css/admin/main.min.css --style compressed",
-    "sass:watch":"sass --watch public/scss/main.scss:public/css/main.min.css --style compressed"
+    "sass-light:watch":"sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
+    "sass-dark:watch":"sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed"
   },
   "repository": {
     "type": "git",

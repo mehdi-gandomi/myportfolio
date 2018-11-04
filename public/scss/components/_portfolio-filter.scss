@@ -1,0 +1,122 @@
+#projects{
+  width: 95%;
+}
+.project-items {
+
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.8rem;
+}
+.filter-section{
+  padding: 10px 0;
+  .filter-btn{
+    outline: 0;
+    display: inline-block;
+    border-radius: 10px;
+    &.active{
+      background: darken($secondary-color, 20);
+      color: set_text_color(darken($secondary-color, 20));
+      
+
+    }
+  }
+}
+.item {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: inline-block;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  &.show{
+    display: block;
+
+    -webkit-animation-name: zoomIn;
+    animation-name: zoomIn;
+  }
+
+  &.hide{
+    display: none;
+  }
+  .image {
+    display: block;
+    width: 100%;
+    height: 200px;
+  }
+  .overlay {
+    position: absolute;
+    transition: all 0.3s ease;
+    background: #5c636e;
+    opacity: 0;
+    .title,
+    .buttons,
+    .skill {
+      color: #f8fff1;
+      position: absolute;
+    }
+    .buttons {
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -40%);
+      font-size: 20px;
+      display: flex;
+      a {
+        padding: 0.7rem;
+        background: #333;
+        margin: 0 5px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include easeOut;
+        &:hover{
+          transform: scale(1.1);
+          background: darken($secondary-color,5);
+
+        }
+      }
+    }
+    .title {
+      top: 70%;
+      padding: 0;
+      margin: 0;
+      left: 50%;
+      transform: translate(-50%, -70%);
+      font-size: 25px;
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .skill {
+      top: 85%;
+      left: 50%;
+      padding: 0;
+      margin: 0;
+      font-size: 0.75rem;
+      transform: translate(-50%, -85%);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .overlay-right {
+    height: 100%;
+    width: 0;
+    top: 0;
+    right: 0;
+  }
+  &:hover {
+    .overlay-right {
+      width: 100%;
+    }
+    .overlay {
+      opacity:0.9;
+    }
+  }
+}

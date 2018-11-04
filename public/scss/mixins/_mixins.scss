@@ -1,0 +1,72 @@
+@mixin size($width,$height:$width){
+  @if (unitless($width)) {
+    $width: $width * 1px;
+  }
+  @if (unitless($height)) {
+    $height: $height * 1px;
+  }
+  width:$width;
+  height:$height;
+ }
+//this function converts px units to em
+@function em($pixels, $context: 16) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return #{$pixels/$context}em
+}
+@mixin responsiveFont($minScreen,$maxScreen,$minFont,$maxFont){
+  font-size: calc(#{$minFont}px + (#{$maxFont} - #{$minFont}) * (100vw - #{$minScreen}px) / (#{$maxScreen} - #{$minScreen}) ) !important;
+}
+
+@mixin easeOut{
+  transition: all 0.5s ease-out;
+}
+@mixin background{
+  @if($show-home-image){
+    &#bg-img{
+      background: $home-image;
+      background-size: cover;
+      background-attachment: fixed;
+      &:after{
+        content: '';
+        position: absolute;
+        top:0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba($primary-color,$background-opacity);
+        z-index: -1;
+      }
+    }
+
+  }
+}
+@function set_text_color($color){
+  @if(lightness($color)>60){
+    @return #000;
+  }
+  @else if(lightness($color)>40){
+    @return #eee;
+  }
+  @else {
+    @return #fff;
+  }
+}
+
+
+//blog mixins
+
+@mixin icon() {
+  display: inline-block;
+  font: normal normal normal 16px/1 ;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}

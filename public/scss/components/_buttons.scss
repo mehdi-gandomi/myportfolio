@@ -1,0 +1,145 @@
+.btn{
+  display: block;
+  padding: 0.5rem 1rem;
+  border: 0;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+  &:hover,&:focus{
+    background: $secondary-color;
+    color: set_text_color($secondary-color);
+  }
+}
+
+.btn-dark{
+  @extend .btn;
+  background: darken($primary-color,50);
+  color: set_text_color($secondary-color);
+}
+.btn-light{
+  @extend .btn;
+  background: lighten($primary-color,50);
+  color: #333;
+}
+
+
+.button{
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  &:disabled,&.disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  &.large{
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+  }
+  &.small{
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+  }
+  &.rounded{
+    border-radius: 8px;
+  }
+  // [class^="outline-"]{
+    
+  // }
+  &.outline-dark{
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid $dark-button-background;
+    &:hover{
+      background-color: $dark-button-background !important;
+      color: $dark-button-foreground !important;    
+    }
+  }
+  &.dark{
+    
+    background-color: $dark-button-background !important;
+    color: $dark-button-foreground !important;
+    &:hover{
+      background-color: darken($dark-button-background, 12) !important;
+    }
+  }
+  &.light{
+    cursor: pointer;
+    background-color:#fff !important;
+    color: #003D5B  !important;
+    &:hover{
+      background-color: darken(#fff, 12) !important;
+    }
+  }
+  &.black{
+    background-color: #000 !important;
+    color: #fff !important;
+    &:hover{
+      background-color: darken(#000, 12) !important;
+    }
+  }
+  &.outline-warning{
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid $warning-button-background;
+    &:hover{
+      background-color: $warning-button-background !important;
+      color: $warning-button-foreground !important;    
+    }
+  }
+  &.warning{
+    background-color: $warning-button-background !important;
+    color: $warning-button-foreground !important;
+    &:hover{
+      background-color: darken($warning-button-background, 12) !important;
+    }
+  }
+  &.outline-danger{
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid $danger-button-background;
+    &:hover{
+      background-color: $danger-button-background !important;
+      color: $danger-button-foreground !important;    
+    }
+  }
+  &.danger{
+    background-color: $danger-button-background !important;
+    color: $danger-button-foreground !important;
+    &:hover{
+      background-color: darken($danger-button-background, 12) !important;
+    }
+  }
+  &.outline-primary{
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid $primary-button-background;
+    &:hover{
+      background-color: $primary-button-background !important;
+      color: $primary-button-foreground !important;    
+    }
+  }
+  &.primary{
+    background-color: $primary-button-background !important;
+    color: $primary-button-foreground !important;
+    &:hover{
+      background-color: darken($primary-button-background, 12) !important;
+    }
+  }
+
+}

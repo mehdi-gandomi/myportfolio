@@ -3,21 +3,21 @@
 
 
 <main id="about-page">
-    <h1 class="lg-heading" data-aos="slide-left" data-aos-delay="0" data-aos-duration="900">
+    <h1 class="lg-heading" data-aos="slide-left" data-aos-delay="0" data-mirror="false" data-aos-duration="900">
         درباره
         <span class="text-secondary">من</span>
     </h1>
-    <h2 class="sm-heading" data-aos="flip-down" data-aos-delay="300" data-aos-duration="1100">
+    <h2 class="sm-heading" data-aos="flip-down" data-aos-delay="300" data-mirror="false" data-aos-duration="1100">
         بذار یه چیزایی درباره خودم بگم
     </h2>
     <div class="about-info">
-        <img data-aos="zoom-in"  data-aos-delay="300" data-aos-duration="1500" class="bio-image" src="{{image_path}}" alt="">
-        <div class="bio" data-aos="fade" data-aos-delay="300" data-aos-duration="2000">
+        <img data-aos="zoom-in"  data-aos-delay="300" data-aos-duration="1500" data-mirror="false" class="bio-image" src="{{image_path}}" alt="">
+        <div class="bio" data-aos="fade" data-aos-delay="300" data-aos-duration="2000" data-aos-offset="10">
             <h3 class="text-secondary">شرح حال مختصر از من</h3>
             <p>{{bio}}</p>
         </div>
         {{#jobFields}}
-            <div class="job job-$" data-aos="flip-down" data-aos-duration="1000">
+            <div class="job job-$" data-aos="flip-down" data-aos-duration="1000" data-mirror="false">
                 <h3>{{title}}</h3>
                 <h6>{{subtitle}}</h6>
                 <p>{{content}}</p>

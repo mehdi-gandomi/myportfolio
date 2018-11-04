@@ -80,14 +80,17 @@ abstract class Model
         }
         return $result->rowCount();
     }
-    protected static function update($tbl_name,$data,$where){
+    protected static function update($tbl_name,$data,$where,$htmlEntity=true){
         $db=static::getDB();
         $arrayKeys=array_keys($data);
         $lastField=end($arrayKeys);
         $sql="UPDATE $tbl_name SET ";
         foreach ($data as $key=>$value){
-            $key=self::prepare_input($key);
-            $value=self::prepare_input($value);
+            if($htmlEntity){
+                $key=self::prepare_input($key);
+                $value=self::prepare_input($value);
+            }
+            
             if ($key==$lastField){
                 $sql.="$key='$value'";
                 break;
