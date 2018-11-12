@@ -12,7 +12,7 @@
     "sass-light:watch":"sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
     "sass-dark:watch":"sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed",
     "git:commit":"git add . & git commit -m %Message%",
-    "git:push":"npm run git:commit &backup_db -d coderguy -o %PWD%",
+    "git:push":"npm run git:commit & npm run db:backup",
     "db:backup":"backup_db -d coderguy -o %PWD%"
   },
   "repository": {
