@@ -8,14 +8,14 @@
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha --require babel-register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-register --colors -w ./test/*.spec.js",
-    "admin-sass:watch":"sass --watch public/scss/admin/main.scss:public/css/admin/main.min.css --style compressed",
-    "sass-light:watch":"sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
-    "sass-dark:watch":"sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed",
-    "git:commit":"git add . && git commit -m %Message%",
-    "git:deploy":"npm run db:backup && git add . && git commit -m %message% && npm run git:push",
-    "db:backup":"backup_db -d coderguy -o %PWD%",
-    "git:reset":"git reset HEAD~ && git add . && git commit -c ORIG_HEAD",
-    "git:push":"git push origin master --force"
+    "admin-sass:watch": "sass --watch public/scss/admin/main.scss:public/css/admin/main.min.css --style compressed",
+    "sass-light:watch": "sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
+    "sass-dark:watch": "sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed",
+    "git:commit": "cross-var git add . && git commit -m $message",
+    "git:deploy": "cross-var npm run db:backup && git add . && git commit -m $message && npm run git:push",
+    "db:backup": "backup_db -d coderguy -o %PWD%",
+    "git:reset": "git reset HEAD~ && git add . && git commit -c ORIG_HEAD",
+    "git:push": "git push origin master --force"
   },
   "repository": {
     "type": "git",
@@ -55,5 +55,8 @@
     "webpack": "^4.12.2",
     "webpack-cli": "^3.0.8",
     "yargs": "^10.0.3"
+  },
+  "dependencies": {
+    "cross-var": "^1.1.0"
   }
 }
