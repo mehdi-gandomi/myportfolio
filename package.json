@@ -11,11 +11,12 @@
     "admin-sass:watch": "sass --watch public/scss/admin/main.scss:public/css/admin/main.min.css --style compressed",
     "sass-light:watch": "sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
     "sass-dark:watch": "sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed",
-    "git:commit": "cross-var git commit -m $message",
-    "git:deploy": "npm run db:backup && git add . && npm run git:commit && npm run git:push",
+    "git:commit": "cross-var git add . && git commit -m $message",
+    "git:deploy": "npm run db:backup &&  npm run git:commit && npm run git:push",
     "db:backup": "backup_db -d coderguy -o %PWD%",
     "git:reset": "git reset HEAD~ && git add . && git commit -c ORIG_HEAD",
-    "git:push": "git push origin master --force"
+    "git:push": "git push origin master --force",
+    "hello":"cross-var echo  $message"
   },
   "repository": {
     "type": "git",
