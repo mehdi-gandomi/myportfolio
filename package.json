@@ -12,11 +12,11 @@
     "sass-light:watch": "sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
     "sass-dark:watch": "sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed",
     "git:commit": "cross-var git add . && git commit -m $message",
-    "git:deploy": "cross-var npm run db:backup &&  git add . && git commit -m $message && npm run git:push",
+    "git:deploy": "npm run db:backup &&  git add . && cross-var  git commit -m $message && npm run git:push",
     "db:backup": "backup_db -d coderguy -o %PWD%",
     "git:reset": "git reset HEAD~ && git add . && git commit -c ORIG_HEAD",
     "git:push": "git push origin master --force",
-    "hello":"cross-var echo  $message"
+    "hello":"git add . && cross-var echo  $message"
   },
   "repository": {
     "type": "git",
