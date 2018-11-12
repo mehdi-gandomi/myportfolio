@@ -11,7 +11,8 @@
     "admin-sass:watch":"sass --watch public/scss/admin/main.scss:public/css/admin/main.min.css --style compressed",
     "sass-light:watch":"sass --watch public/scss/main-light.scss:public/css/main.light.min.css --style compressed",
     "sass-dark:watch":"sass --watch public/scss/main-dark.scss:public/css/main.dark.min.css --style compressed",
-    "github:push":"git add . & git commit -m ${Message} & backup_db -d 'coderguy' -o 'E:\\xampp\\htdocs\\coderguy'"
+    "github:push":"git add . & git commit -m '%Message%' & backup_db -d coderguy -o %PWD%",
+    "db:backup":"backup_db -d coderguy -o %PWD%"
   },
   "repository": {
     "type": "git",
