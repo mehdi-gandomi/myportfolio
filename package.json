@@ -15,7 +15,7 @@
     "git:deploy":"npm run db:backup && git add . && git commit -m %message% && npm run git:push",
     "db:backup":"backup_db -d coderguy -o %PWD%",
     "git:reset":"git reset HEAD~ && git add . && git commit -c ORIG_HEAD",
-    "git:push":"git push origin master"
+    "git:push":"git push origin master --force"
   },
   "repository": {
     "type": "git",
